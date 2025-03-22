@@ -1,0 +1,54 @@
+<div class="background" [ngStyle]="{ 'background-image': backgroundImage }">
+    <div class="container justified">
+        <div mat-dialog-content class="content justified">
+            <div class="message-background"><div class="message" [innerHTML]="dialog.message"></div></div>
+            <div id="nameInput-container" *ngIf="dialog.showCodeInput">
+                <input class="input" type="text" [(ngModel)]="dialog.codeInputValue" [placeholder]="dialog.inputPlaceHolder" />
+            </div>
+
+            <div class="message-background" *ngIf="dialog.showNameMessage"><div class="message" [innerHTML]="dialog.nameMessage"></div></div>
+
+            <div id="nameInput-container" *ngIf="dialog.showNameInput">
+                <input
+                    class="input"
+                    type="text"
+                    maxlength="11"
+                    [(ngModel)]="dialog.nameInputValue"
+                    [placeholder]="dialog.nameInputPlaceHolder"
+                    (ngModelChange)="valueChange(dialog.nameInputValue!)"
+                />
+                <span id="character-count">{{ remainingTextCount }}</span>
+            </div>
+        </div>
+
+        <div mat-dialog-actions class="interative-box justified-row">
+            <span
+                class="button-wrapper"
+                *ngIf="dialog.showConfirmButton"
+                (click)="buttonClicked()"
+                [mat-dialog-close]="
+                    dialog.showCodeInput || dialog.showNameInput ? { code: dialog.codeInputValue, name: dialog.nameInputValue } : true
+                "
+            >
+                <button class="confirm shrink-on-active">
+                    {{ dialog.confirmButtonName }}
+                </button>
+            </span>
+            <span
+                class="button-wrapper"
+                *ngIf="dialog.showRedirectButton"
+                (click)="buttonClicked(); dialogRef.close()"
+                [routerLink]="dialog.redirectTo"
+            >
+                <button class="redirect shrink-on-active">
+                    {{ dialog.redirectButtonName }}
+                </button>
+            </span>
+            <span class="button-wrapper" *ngIf="dialog.showCancelButton" (click)="buttonClicked(); dialogRef.close()">
+                <button class="close shrink-on-active" mat-dialog-close="undefined">
+                    {{ dialog.cancelButtonName }}
+                </button>
+            </span>
+        </div>
+    </div>
+</div>

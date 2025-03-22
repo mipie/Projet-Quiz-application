@@ -1,0 +1,344 @@
+@font-face {
+    font-family: textFont;
+    src: url('./../../../assets/textFont.otf');
+}
+@import "~@fortawesome/fontawesome-free/css/all.css";
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-weight: 300;
+}
+
+.dialog-container {
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    justify-content: flex-start;
+    background-size: cover;
+    min-width: 700px;
+    min-height: 600px;
+    font-family: textFont;
+}
+
+.title {
+    font-family: "textFont";
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 15px;
+    align-self: center;
+    border-radius: 5px;
+    margin: 10px;
+    width: -webkit-fill-available;
+    font-size: 25px;
+}
+button {
+    background-color: rgba(0, 0, 0, 0.9);
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    border: none;
+    border-radius: 50%;
+    height: 30px;
+    width: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.9);
+    opacity: 1;
+}
+
+button:hover{
+    background-color: rgba(0, 0, 0, 1);
+    box-shadow: 0 0 15px black;
+}
+button:active{
+    background-color:  rgba(0, 0, 0, 0.6);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 1);
+}
+.buttonB { 
+    position: absolute;
+    top: 50%;
+    left: 0
+
+}
+
+.buttonA { 
+    position: absolute;
+    top: 50%;
+    right:0;
+}
+.container {
+    flex-grow: 1;
+    margin: 10px;
+    margin-top: 0;
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px 10px 0 0;
+    background-color: rgba(255, 255, 255, 0.3);
+    display:flex;
+}
+.button-container {
+    display: flex;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.button-container span {
+    flex: 1;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.3);
+    color: black;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-family: textFont;
+    font-size: 30px;
+}
+
+.button-container span.active {
+    background-color: rgba(255, 255, 255, 0.8);
+}
+
+.button-container span:hover {
+    background-color: rgba(255, 255, 255, 0.5);
+}
+
+.statistics-section {
+    font-family: textFont;
+    font-family: textFont;
+    width: 400px;
+    align-self: center;
+}
+
+.historics-section {
+    font-family: textFont;
+}
+
+.column-header {
+    margin: 0 20px;
+}
+
+.column-name,
+.column-result,
+.column-date {
+    flex: 1;
+    text-align: center;
+}
+
+.historics-list ul {
+    overflow-y: auto;
+    position: absolute;
+    max-height: 265px;
+    max-width: 520px;
+    width: 100%;
+    border-bottom: 3px solid white;
+    border-top: 3px solid white;
+    border-radius: 0.5rem;
+    margin-left: 1.5rem;
+}
+.historic-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 10px;
+    border-bottom: 1px solid black;
+}
+
+.name-item {
+    flex: 1;
+}
+
+.result-item {
+    flex: 1;
+    text-align: center;
+}
+
+.date-item {
+    flex: 1;
+    text-align: right;
+}
+
+.statistic-item:last-child {
+    border-bottom: none;
+}
+
+.ranking-section {
+    font-family: textFont;
+}
+
+h3 {
+    font-size: 24px;
+    margin: 15px auto;
+    margin-top: 35px;
+}
+
+.ranking-section .column-header {
+    display: flex;
+    justify-content: space-between;
+    color: black;
+    font-size: 16px;
+    border-bottom: 3px solid black;
+    margin-bottom: 10px;
+    padding: 0 30px 0 20px;
+    padding-bottom: 5px;
+}
+
+.statistic-detail {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+}
+
+.column-header div, .rank-details div {
+    width: 80px;
+}
+
+.column-rank,
+.column-username,
+.column-points,
+.column-victory,
+.column-draw,
+.column-defeat {
+    text-align: center;
+}
+
+.scroll-bar {
+    display: flex;
+    max-height: 380px;
+    overflow-y: scroll;
+    flex-direction: column;
+    flex-grow: 1;
+    margin: 0 20px 0 20px;
+    padding-top: 5px;
+}
+
+.rank-list {
+    background-color: rgb(255 255 255 / 30%);
+    display: flex;
+    justify-content: space-between;
+    border: solid 1px rgb(255 255 255 / 40%);
+    padding: 6px;
+    margin: 3px 10px;
+}
+
+.rank-details {
+    display: flex ;
+    width: 100%;
+    text-align: center;
+    justify-content: space-between;
+}
+
+.rank,
+.points,
+.victory,
+.draw,
+.defeat {
+    width: 5px;
+}
+
+.rank-diamond {
+    background-image: url('./../../../assets/diamondRanking.jpg');
+    border: 3px solid #ffffff8c;
+    min-height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    box-shadow: 0 0 10px black;
+}
+
+.rank-gold {
+    background-color: gold;
+    border: 3px solid #ffffff8c;
+    min-height: 45px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    box-shadow: 0 0 10px black;
+}
+
+.rank-silver {
+    background-color: silver;
+    border: 3px solid #ffffff50;
+    min-height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    box-shadow: 0 0 10px black;
+}
+
+.rank-bronze {
+    background-color: #cd7f32;
+    border: 3px solid #ffffff35;
+    min-height: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    box-shadow: 0 0 10px black;
+}
+
+::-webkit-scrollbar {
+    position: relative;
+    left: 10;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(7, 7, 7, 0.5);
+    border-radius: 12px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(7, 7, 7, 0.6);
+}
+
+::-webkit-scrollbar-thumb:active {
+    background: rgba(7, 7, 7, 0.7);
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(211, 211, 211, 0);
+}
+
+::-webkit-scrollbar {
+    width: 15px;
+}
+
+.historic {
+    display: flex;
+    flex-direction: column;
+    font-family: textFont;
+    flex-grow: 1;
+    align-items: center;
+    justify-self: center;
+    justify-content: flex-start;
+    margin-bottom: 15px;
+    flex-grow: 1
+}
+.first-row{ 
+    display: flex;
+    font-size: 17px;
+    padding-bottom: 5px;
+    border-bottom: 3px solid black;
+    width: 90%;
+    justify-content: flex-start;
+}
+.historic-list {
+    width: 80%;
+    font-size: 14px;
+    width: 80%;
+    font-size: 14px;
+    max-height: 200px;
+    overflow: auto;
+}
+.row {
+    display:flex;
+    flex-direction: column;
+}
+.noGames {
+    margin-top: 80px;
+    text-align: center;
+}

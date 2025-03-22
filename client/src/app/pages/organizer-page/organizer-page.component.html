@@ -1,0 +1,103 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" />
+<div class="background" *ngIf="isNext">
+    <div id="next-q-countdown-container" class="justified">
+        <p id="next-q-countdown">{{ time }}s</p>
+    </div>
+</div>
+
+<div class="container" [ngStyle]="{ 'background-image': backgroundImage }">
+    <app-chat
+        [class.isChatMinimized]="isChatMinimized"
+        [class.isChatNotMinimized]="!isChatMinimized"
+        [class.withTransition]="isInitialized"
+        (isMinimizedEvent)="onChatMinimized($event)"
+        (isWindowEvent)="onWindowChange($event)"
+        class="chat"
+    >
+    </app-chat>
+
+    <div class="main-section" [class.isMenuMinimized]="!isChatMinimized" [class.isMenuNotMinimized]="isChatMinimized"  [class.withTransition]="isInitialized">
+        <div id="question-title">{{ questionIndex + 1 }}. {{ question.text }} ({{ question.points }} points):</div>
+        <app-histogram class="histo" *ngIf="!(isQRL && isAllFinish && !isShowResult)"></app-histogram>
+        <div class="qrl-answers-container justified" *ngIf="question.type === 'QRL'">
+            <span class="info" *ngIf="(isAllFinish || time === 0) && answers.length > 0">
+                {{ evaluateQRL }}
+            </span>
+            <div class="answers-container" *ngIf="(isAllFinish || time === 0) && answers.length > 0">
+                <div class="answer-container" *ngFor="let each of answers; let i = index">
+                    <textarea class="textarea" type="text" [ngModel]="each.answer" disabled> </textarea>
+                    <div class="player-name">{{ each.playerName }}</div>
+                    <div class="evaluation-zone">
+                        <div class="zero zone justified" (click)="evaluateQRLAnswer(i, 0)">0%</div>
+                        <div class="fifty zone justified" (click)="evaluateQRLAnswer(i, 50)">50%</div>
+                        <div class="hundred zone justified" (click)="evaluateQRLAnswer(i, 100)">100%</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="bottom-info">
+            <p class="info" *ngIf="(isAllFinish || time === 0) && answers.length > 0">{{ qteAnswer }} : {{ answers.length }}</p>
+            <p class="info" *ngIf="time === 0">{{ countdownFinish }}</p>
+            <p class="info" *ngIf="isAllFinish">{{ allPlayersFinish }}</p>
+
+            <div class="buttons-container">
+                <span class="button-wrapper" *ngIf="!disable && !isLast" (click)="buttonClick(); timerNextQuestion()">
+                    <button class="button shrink-on-active" [class.disabled]="disable" [disabled]="disable">{{ nextQuestion }}</button>
+                </span>
+                <span class="button-wrapper" *ngIf="isLast" (click)="buttonClick(); usersToResult()">
+                    <button class="button shrink-on-active" [disabled]="!isLast">{{ presentResult }}</button>
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <div class="right-section">
+        <span class="quit-button-wrapper" (click)="quitGame()">
+            <button class="button shrink-on-active" id="quit-button">
+                <i class="fas fa-sign-out"></i>
+            </button>
+        </span>
+        <div class="leaderboard-container">
+            <div class="image-box" *ngIf="question.imageUrl![0]">
+                <link rel="preload" href="question.imageUrl![0]" as="image" />
+                <img *ngIf="question.imageUrl![0]" [src]="question.imageUrl![0]" loading="lazy" style="width: 100%;height: 100%;" />
+            </div>
+            <div class="leaderboard">
+                <app-player-list></app-player-list>
+            </div>
+            <span class="countdown-container">
+                <button class="button-wrapper-time" (click)="buttonClick(); togglePausePlay()" [disabled]="!time || isAllFinish">
+                    <button id="pause" class="button shrink-on-active" [class.paused]="isPaused" [disabled]="!time || isAllFinish">
+                        <i class="fa" [ngClass]="{ 'fa-pause': !isPaused, 'fa-play': isPaused }"></i>
+                    </button>
+                </button>
+                <span class="countdown-title">{{ timeLeft }}: </span>
+                <span
+                    class="countdown-time"
+                    [style.text-shadow]="isPaused ? '0 0 50px rgb(114, 232, 247)' : isPanicMode ? '0 0 50px rgb(176 23 54)' : 'none'"
+                >
+                    <div
+                        [style.color]="isPaused ? 'rgb(49, 146, 159)' : isPanicMode ? 'rgb(194, 21, 56)' : time! > 10 ? 'black' : 'rgba(144, 28, 51)'"
+                        style="font-size: 50px;"
+                        *ngIf="!isNext && time !== null"
+                    >
+                        {{ time }}s
+                    </div>
+                </span>
+                <span class="button-wrapper justified" style="height: 56px; width: 56px">
+                    <button
+                        class="button-wrapper-time"
+                        (click)="buttonClick(); activatePanicMode()"
+                        *ngIf="isPanicQCM() || isPanicQRL() || isPanicQRE()"
+                        [disabled]="!time || isAllFinish"
+                        [disabled]="isPanicMode"
+                    >
+                        <button id="panic" class="button shrink-on-active" [class.panic]="isPanicMode" [disabled]="isPanicMode">
+                            <i class="fa fa-exclamation"></i> <i class="fa fa-exclamation"></i>
+                        </button>
+                    </button>
+                </span>
+            </span>
+        </div>
+    </div>
+</div>

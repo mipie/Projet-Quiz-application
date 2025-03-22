@@ -1,0 +1,74 @@
+<div class="cree-jeu-page">
+    <app-header></app-header>
+    <div></div>
+    <div class="container" [ngStyle]="{ 'background-image': backgroundImage }">
+        <div class="create-container" *ngIf="this.gameDetails">
+            <h1>{{ titleLabel }}</h1>
+            <form class="formGame">
+                <div class="titleGame">
+                    <label for="valueTitle">{{ nameLabel }} : </label>
+                    <input
+                        #requiredInput
+                        #titleText
+                        type="text"
+                        class="valueTitle"
+                        name="valueTitle"
+                        placeholder="ALIEN"
+                        [(ngModel)]="this.gameDetails.game.title"
+                        [class.error]="errorMessageTitle"
+                        (keydown.enter)="changeFocus($event, titleText)"
+                        title="Appuyez sur 'Entrée' pour passer au prochain champ requis!"
+                    />
+                    <p>{{ errorMessageTitle }}</p>
+                </div>
+                <div class="descriptionGame">
+                    <label id="description-label" for="valueDescription">{{ descriptionLabel }} : </label>
+                    <textarea
+                        #requiredInput
+                        #descriptionText
+                        class="valueDescription"
+                        placeholder="TOP 10 ALIENS"
+                        rows="1"
+                        name="valueDescription"
+                        oninput='this.style.height = "";this.style.height = this.scrollHeight + "px"'
+                        [(ngModel)]="this.gameDetails.game.description"
+                        [class.error]="errorMessageDescription"
+                        (keydown.enter)="changeFocus($event, descriptionText)"
+                        title="Appuyez sur 'Entrée' pour passer au prochain champ requis!"
+                    ></textarea>
+                    <p>{{ errorMessageDescription }}</p>
+                </div>
+                <div class="durationGame">
+                    <label for="valueDuration">{{ durationLabel }} :</label>
+                    <input
+                        #requiredInput
+                        #durationText
+                        type="text"
+                        class="valueDuration"
+                        name="valueDuration"
+                        placeholder="0s"
+                        [(ngModel)]="this.gameDetails.game.duration"
+                        [class.error]="errorMessageDuration"
+                        (keydown.enter)="changeFocus($event, durationText)"
+                        title="Appuyez sur 'Entrée' pour passer au prochain champ requis!"
+                    />
+                    <p>{{ errorMessageDuration }}</p>
+                    <div class="noteQRL">{{ durationHelpLabel }}</div>
+                </div>
+                <div class="noteQuestions">{{ questionHelpLabel }}.</div>
+                <app-question-form
+                    [questions]="this.gameDetails.game.questions"
+                    (areQuestionsValidEvent)="validateQuestions($event)"
+                ></app-question-form>
+            </form>
+            <div class="button-confirm">
+                <span class="button-wrapper" (click)="saveDataGame()">
+                    <button class="confirm-button shrink-on-active">{{ saveLabel }}</button>
+                </span>
+                <span class="button-wrapper" (click)="cancel()">
+                    <button class="cancel-button shrink-on-active">{{ cancelLabel }}</button>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>

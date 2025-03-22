@@ -1,0 +1,177 @@
+<div cdkDropList class="questions-container" (cdkDropListDropped)="dropQuestion($event)">
+    <div
+        class="question question-enlarge-on-hover"
+        [class.isQCM]="question.type === 'QCM'"
+        [class.isQRL]="question.type === 'QRL'"
+        [class.isQRE]="question.type === 'QRE'"
+        *ngFor="let question of questions; let i = index"
+        cdkDrag
+    >
+        <div class="question-options">
+            <label>Question {{ i + 1 }}.</label>
+            <input
+                #requiredInput
+                #questionText
+                [ngClass]="'question-input-' + i"
+                type="text"
+                maxlength="200"
+                [id]="'textQuestion' + question.id"
+                [name]="'textQuestion' + question.id"
+                [(ngModel)]="question.text"
+                placeholder="Question (max 200 chars.)"
+                class="question-statement-input"
+                [class.error]="!question.text && errors[i].textError"
+                (keydown.enter)="changeFocus($event, questionText)"
+                title="Appuyez sur 'Entrée' pour passer au prochain champ requis!"
+            />
+            <select
+                #questionType
+                #requiredInput
+                class="type-question"
+                [name]="'typeQuestion' + question.id"
+                [ngClass]="'type-question-' + i"
+                [id]="'typeQuestion' + question.id"
+                [(ngModel)]="question.type"
+                [class.error]="!question.type && errors[i].typeError"
+                autocomplete="off"
+                (keydown.enter)="changeFocus($event, questionType)"
+                (click)="changeQuestion($event, question)"
+                title="Appuyez sur 'Entrée' pour passer au prochain champ requis!"
+            >
+                <option disabled value="">Type</option>
+                <option value="QRL" selected>QRL</option>
+                <option value="QCM">QCM</option>
+                <option value="QRE">QRE</option>
+            </select>
+            <select
+                #requiredInput
+                #questionPoints
+                class="points-question"
+                [name]="'points' + question.id"
+                [id]="'points' + question.id"
+                [ngClass]="'points-question-' + i"
+                [(ngModel)]="question.points"
+                [class.error]="!question.points && errors[i].pointsError"
+                (keydown.enter)="changeFocus($event, questionPoints)"
+                title="Appuyez sur 'Entrée' pour passer au prochain champ requis!"
+            >
+                <option value="0" disabled>0 pts</option>
+                <option value="10" selected>10 pts</option>
+                <option value="20">20 pts</option>
+                <option value="30">30 pts</option>
+                <option value="40">40 pts</option>
+                <option value="50">50 pts</option>
+                <option value="60">60 pts</option>
+                <option value="70">70 pts</option>
+                <option value="80">80 pts</option>
+                <option value="90">90 pts</option>
+                <option value="100">100 pts</option>
+            </select>
+            <button class="delete-question enlarge-on-hover" (click)="deleteQuestion(i)" *ngIf="questions.length > 1">‾</button>
+        </div>
+        <div *ngIf="question?.type === 'QRL'" cdkDropList class="answers-container" (cdkDropListDropped)="dropAnswer($event, i)">
+            <div class="input-div">
+                <p id="browseInput" class="imageInput">
+                    {{ firstBrowseLabel }} <span class="browse">{{ secondBrowseLabel }}</span>
+                </p>
+                <input type="file" class="file" multiple (change)="onFileSelected($event, question)" accept="image/jpeg, image/jpg" />
+                <img class="imageClass" *ngIf="question.imageUrl![0]" [src]="question.imageUrl![0]" alt="Image preview" />
+            </div>
+            <p *ngIf="errorSizeImage">{{ errorSizeImage }}</p>
+        </div>
+        <p *ngIf="this.errors[i].textError">{{ this.errors[i].textError }}</p>
+        <p *ngIf="this.errors[i].typeError">{{ this.errors[i].typeError }}</p>
+        <p *ngIf="this.errors[i].pointsError">{{ this.errors[i].pointsError }}</p>
+        <div *ngIf="question.type === 'QRE'" cdkDropList class="answers-container" (cdkDropListDropped)="dropAnswer($event, i)">
+            <div class="QRE-answer">
+                <input #requiredInput class="lowerBound" type="number" [(ngModel)]="question.qre!.lowerBound" placeholder="Minimum" />
+                <div class="QRE-margin">
+                    <p *ngIf="this.calculateMargin(question, false) !== false" class="lowerMargin">
+                        {{ this.calculateMargin(question, false) }}
+                    </p>
+                    <input
+                        #requiredInput
+                        class="goodAnswer"
+                        type="number"
+                        [(ngModel)]="question.qre!.goodAnswer"
+                        name="goodAnswer"
+                        placeholder="Solution"
+                        required
+                    />
+                    <div class="space-goodanswer">
+                        <input #requiredInput class="toleranceMargin" type="number" [(ngModel)]="question.qre!.margin" placeholder="Marge" />
+                    </div>
+                    <p class="lowerMargin" *ngIf="this.calculateMargin(question, true)">{{ this.calculateMargin(question, true) }}</p>
+                </div>
+                <input #requiredInput class="upperBound" type="number" [(ngModel)]="question.qre!.upperBound" placeholder="Maximum" />
+            </div>
+            <div class="marginMessage">{{ marginLabel }}</div>
+            <div class="input-div">
+                <p id="browseInput" class="imageInput">
+                    {{ firstBrowseLabel }}<span class="browse">{{ secondBrowseLabel }}</span>
+                </p>
+                <input type="file" class="file" multiple (change)="onFileSelected($event, question)" accept="image/jpeg, image/jpg" />
+                <img class="imageClass" *ngIf="question.imageUrl![0]" [src]="question.imageUrl![0]" alt="Image preview" />
+            </div>
+            <p *ngIf="errorSizeImage">{{ errorSizeImage }}</p>
+        </div>
+        <div *ngIf="question.type === 'QCM'" cdkDropList class="answers-container" (cdkDropListDropped)="dropAnswer($event, i)">
+            <div class="answer">
+                <div class="choice" *ngFor="let choice of question.choices; let j = index" cdkDrag>
+                    <div>{{ j + 1 }}.</div>
+                    <input
+                        #requiredInput
+                        #choiceText
+                        class="choice-input"
+                        type="text"
+                        maxlength="100"
+                        [ngClass]="'choice-input-' + i + j"
+                        [name]="'choiceText' + question.id + choice.id"
+                        [(ngModel)]="choice.text"
+                        placeholder="Solution {{ j + 1 }} (max 100 chars.)"
+                        [class.error]="!choice.text && (this.errors[i].choicesError || this.errors[i].typeError)"
+                        (keydown.enter)="changeFocus($event, choiceText)"
+                        title="Appuyez sur 'Entrée' pour passer au prochain champ requis!"
+                    />
+                    <div class="checkbox-container enlarge-on-hover">
+                        <input
+                            #requiredInput
+                            #choiceCheck
+                            type="checkbox"
+                            class="checkbox"
+                            [name]="'choiceValue' + question.id + choice.id"
+                            [(ngModel)]="choice.isCorrect"
+                            [class.error]="errors[i].typeError"
+                            (keydown.enter)="changeFocus($event, choiceCheck)"
+                            title="Appuyez sur 'Espace' pour cocher/décocher!"
+                        />
+                        <div class="checkbox-border"></div>
+                    </div>
+                    <button class="delete-choice-button enlarge-on-hover" (click)="deleteChoice(i, j)" *ngIf="questions[i].choices!.length > 2">
+                        ‾
+                    </button>
+                </div>
+
+                <p *ngIf="this.errors[i].choicesError">{{ this.errors[i].choicesError }}</p>
+                <div class="add-choice-button-div">
+                    <span class="button-wrapper" (click)="addChoice(i)" *ngIf="questions[i].choices!.length < 4">
+                        <button class="add-choice-button shrink-on-active">{{ addAnswerLabel }}</button>
+                    </span>
+                </div>
+                <div class="input-div">
+                    <p id="browseInput" class="imageInput">
+                        {{ firstBrowseLabel }}<span class="browse">{{ secondBrowseLabel }}</span>
+                    </p>
+                    <input type="file" class="file" multiple (change)="onFileSelected($event, question)" accept="image/jpeg, image/jpg" />
+                    <img class="imageClass" *ngIf="question.imageUrl![0]" [src]="question.imageUrl![0]" alt="Image preview" />
+                </div>
+                <p *ngIf="errorSizeImage">{{ errorSizeImage }}</p>
+            </div>
+        </div>
+    </div>
+    <div class="add-question-button-div">
+        <span class="button-wrapper" (click)="addQuestion()">
+            <button class="add-question shrink-on-active">{{ addQuestionLabel }}</button>
+        </span>
+    </div>
+</div>

@@ -1,0 +1,202 @@
+<div class="message" [ngStyle]="{ 'background-image': backgroundImage }">
+    <div class="canals-chat">
+        <div class="canal-div">
+            <div class="chat-canal-add-border" (click)="onAddingCanal()">
+                <img #chatCanalAdd class="chat-canal-add" [src]="'./assets/chatAdd.png'" [class.isAddingCanal]="isAddingCanal" />
+            </div>
+            <div class="canal-title" style="white-space: pre-wrap">{{ channelsService.currentChannel.startsWith('*************') ? 'Salle: ' + channelsService.currentChannel.slice(13): channelsService.currentChannel }}</div>
+            <div (click)="onChoosingCanal()" class="chat-canal-add-border" style="border-left: 2px solid rgba(255, 255, 255, 0.9); border-right: 0;">
+                <i class="chat-canal-arrow" [class]="isChoosingCanal ? 'fa-solid fa-compress' : 'fa-solid fa-list' "></i>
+            </div>
+        </div>
+
+        <div *ngIf="isAddingCanal" [class.showOptions]="isAddingCanal || isChoosingCanal" class="chat-canal-options">
+            <p id="create-canal-title">{{ createChannel }}</p>
+            <div class="chat-canal-options create">
+                <input
+                    [disabled]="wasChannelCreated"
+                    (keydown)="inputValidation($event, newChannelName)"
+                    (keydown.enter)="createNewChannel()"
+                    type="text"
+                    id="name"
+                    name="name"
+                    maxlength="12"
+                    placeholder="{{ channelPlaceholder }}"
+                    [(ngModel)]="newChannelName"
+                    (ngModelChange)="detectInput()"
+                />
+                <a (click)="createNewChannel()">
+                    <button class="create-canal" id="create-canal">{{ create }}</button>
+                </a>
+            </div>
+            <div class="info-messages">
+                <div *ngIf="creationMessage && newChannelName" [ngClass]="{ 'ok-messages': wasChannelCreated, 'error-messages': !wasChannelCreated }">
+                    {{ creationMessage }}
+                </div>
+            </div>
+
+            <p id="created-canal-title" *ngIf="channelsToJoin.length > 0">{{ joinExistantChannel }}</p>
+            <input
+                [(ngModel)]="querrySearchJoindableChannels"
+                (ngModelChange)="searchJoinableChannels(querrySearchJoindableChannels)"
+                class="search-bar no-margin-top"
+                *ngIf="channelsToJoin.length > 0"
+                placeholder="{{ search }}"
+                (keydown)="inputValidation($event, querrySearchJoindableChannels)"
+            />
+            <div *ngIf="channelsToJoin.length > 0 && !querrySearchJoindableChannels" class="chat-canal-options created">
+                <div *ngFor="let title of channelsToJoin" (click)="showChannel(title, true); joinChannel(title, $event)">
+                    <p>
+                        <span style="white-space: pre-wrap">{{ title }}</span>
+                        <a (click)="joinChannel(title, $event)">
+                            <button class="create-canal">{{ join }}</button>
+                        </a>
+                    </p>
+                </div>
+            </div>
+            <div *ngIf="channelsToJoin.length > 0 && querrySearchJoindableChannels" class="chat-canal-options created">
+                <div *ngFor="let title of searchJoindableChannelsResults" (click)="showChannel(title, true); joinChannel(title, $event)">
+                    <p>
+                        <span style="white-space: pre-wrap">{{ title }}</span>
+                        <a (click)="joinChannel(title, $event)">
+                            <button class="create-canal">{{ join }}</button>
+                        </a>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div *ngIf="isChoosingCanal" [class.showOptions]="isAddingCanal || isChoosingCanal" class="chat-canal-options">
+            <input
+                class="search-bar"
+                placeholder="{{ search }}"
+                [(ngModel)]="querrySearchActiveChannels"
+                (keydown)="inputValidation($event, querrySearchActiveChannels)"
+                (ngModelChange)="searchActiveChannels(querrySearchActiveChannels)"
+            />
+            <p id="created-canal-title" class="joined-channels">{{ yourChannel }}</p>
+            <div *ngIf="!querrySearchActiveChannels" class="chat-canal-options containerTop">
+                <p class="salon-general" (click)="showChannel('KAM? PAF!', true)">
+                    <span>{{ generalChannel }}</span>
+                </p>
+                <p *ngIf="channelsService.roomCode" class="salon-general" (click)="showChannel('*************' + channelsService.roomCode, true)">
+                    <span>{{ 'Salle: ' + channelsService.roomCode }}</span>
+                </p>
+                <div *ngFor="let userChannel of channelsService.currentUser?.joinedChannels" (click)="showChannel(userChannel.title, true)">
+                    <p *ngIf="userChannel.title !== 'KAM? PAF!' && !userChannel.title.startsWith('*************')">
+                        <span style="white-space: pre-wrap">{{ userChannel.title }}</span>
+                        <a (click)="quitChannel(userChannel.title, $event)">
+                            <button class="quitter-canal-specifique">{{ quitExistantChannel }}</button>
+                        </a>
+                    </p>
+                </div>
+            </div>
+            <div *ngIf="querrySearchActiveChannels" class="chat-canal-options containerTop">
+                <div *ngFor="let title of searchJoinedChannelsResults" (click)="showChannel(title, true)">
+                    <p *ngIf="title === 'KAM? PAF!'" class="salon-general" (click)="showChannel('KAM? PAF!', true)">
+                        <span>{{ generalChannel }}</span>
+                    </p>
+                    <p *ngIf="title === channelsService.roomCode" class="salon-general" (click)="showChannel('*************' + channelsService.roomCode, true)">
+                        <span>{{ 'Salle: ' + channelsService.roomCode }}</span>
+                    </p>
+                    <p *ngIf="title !== 'KAM? PAF!'">
+                        <span style="white-space: pre-wrap">{{ title }}</span>
+                        <a (click)="quitChannel(title, $event)">
+                            <button class="quitter-canal-specifique">{{ quitExistantChannel }}</button>
+                        </a>
+                    </p>
+                </div>
+            </div>
+
+            <p *ngIf="channelsService.currentUser && channelsService.currentUser.createdChannels.length > 0" id="created-canal-title">{{ channelCreated }}</p>
+            <div
+                *ngIf="channelsService.currentUser && channelsService.currentUser.createdChannels.length > 0 && !querrySearchActiveChannels"
+                class="chat-canal-options containerBottom"
+            >
+                <div *ngFor="let userChannel of channelsService.currentUser!.createdChannels" (click)="showChannel(userChannel.title, true)">
+                    <p *ngIf="!userChannel.title.startsWith('*************')">
+                        <span style="white-space: pre-wrap"> {{ userChannel.title }}</span>
+                        <a (click)="deleteChannel(userChannel.title, $event)">
+                            <button class="quitter-canal-specifique">{{ deletedtxt }}</button>
+                        </a>
+                    </p>
+                </div>
+            </div>
+            <div
+                *ngIf="channelsService.currentUser && channelsService.currentUser.createdChannels.length > 0 && querrySearchActiveChannels"
+                class="chat-canal-options containerBottom"
+            >
+                <div *ngFor="let title of searchCreatdedChannelsResults" (click)="showChannel(title, true)">
+                    <p *ngIf="!title.startsWith('*************')">
+                        <span style="white-space: pre-wrap">{{ title }}</span>
+                        <a (click)="deleteChannel(title, $event)">
+                            <button class="quitter-canal-specifique">{{ quitExistantChannel }}</button>
+                        </a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="conversation" (click)="returnToChat()" #scrollbar>
+        <div class="inverted">
+            <div
+                class="singular-chat"
+                *ngFor="let message of channelsService.messages; trackBy: trackByIndex"
+                [class.notFromAdmin]="!message.fromAdmins"
+                [class.sentByMe]="message.username === channelsService.currentUser?.username"
+                [ngStyle]="{
+                    'align-self': message.fromAdmins ? 'center' : message.username === channelsService.currentUser?.username ? 'flex-end' : 'flex-start'
+                }"
+            >
+                <div *ngIf="!message.fromAdmins">
+                    <div class="chat-header" [ngStyle]="{ direction: message.username === channelsService.currentUser?.username ? 'rtl' : 'ltr' }">
+                        <img class="avatar" [src]="message.avatar">
+                        <p class="author" [class.sentByOrg]="message.username === 'Organisateur'" style="white-space: pre-wrap">
+                            {{ message.username }}
+                        </p>
+                        <p class="time">{{ message.time.toDate() | date: 'HH:mm:ss' }}</p>
+                    </div>
+                    <div class="chat-text" style="white-space: pre-wrap">
+                        {{ message.message }}
+                    </div>
+                </div>
+                <div
+                    *ngIf="message.fromAdmins"
+                    class="sentByAdmins"
+                    [ngClass]="{
+                        joined: message.message.includes('join'),
+                        left: message.message.includes('quit') || message.message.includes('left')
+                    }"
+                    style="white-space: pre-wrap"
+                >
+                    {{ message.message }}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <form id="send-container" (submit)="onSubmit($event)">
+        <textarea
+            type="text"
+            id="message-input"
+            rows="1"
+            maxlength="200"
+            [class.mute]="(channelsService.isMute && channelsService.currentChannel.startsWith('*************')) || deletedChannel === channelsService.currentChannel"
+            [placeholder]="(channelsService.isMute && channelsService.currentChannel.startsWith('*************')) ? channelsService.isMuted : enterMessage"
+            [placeholder]="deletedChannel ? hoteDeleteChannel : enterMessage"
+            [(ngModel)]="(channelsService.isMute && channelsService.currentChannel.startsWith('*************')) ? '' : messageInput"
+            oninput='this.style.height = "";this.style.height = this.scrollHeight-17 + "px"'
+            onchange='this.style.height = ""'
+            (keydown.enter)="onSubmit($event)"
+            (keydown)="inputValidation($event, messageInput)"
+            (ngModelChange)="valueChange(messageInput)"
+            [ngModelOptions]="{ standalone: true }"
+            [disabled]="(channelsService.isMute && channelsService.currentChannel.startsWith('*************')) || deletedChannel === channelsService.currentChannel"
+        ></textarea>
+        <span *ngIf="!(channelsService.isMute && channelsService.currentChannel.startsWith('*************'))|| deletedChannel" id="character-count">{{ remainingTextCount }}</span>
+        <button type="submit" id="send-button" (click)="onSubmit($event)" [disabled]="(channelsService.isMute && channelsService.currentChannel.startsWith('*************')) || deletedChannel === channelsService.currentChannel">
+            {{ sendMessage }}
+        </button>
+    </form>
+</div>

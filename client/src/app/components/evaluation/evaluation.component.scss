@@ -1,0 +1,113 @@
+.container-evaluation {
+    display: flex;
+    background-size: cover;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 400px;
+    width: 500px;
+    font-family: 'textFont';
+  }
+  
+  .container-evaluation > div {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+  }
+
+.title-container {
+    display: flex;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.title-container span {
+    flex: 1;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.8);
+    color: black;
+    text-align: center;
+    transition: background-color 0.3s ease;
+    font-family: textFont;
+    font-size: 30px;
+}
+
+.game-name {
+    text-align: center;
+    font-family: "textFont";
+    font-size: 1.2rem;
+    margin-top: 2.7rem;
+    margin-bottom: 1.5rem;
+}
+
+.evaluation-star {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 1.5rem;
+    justify-content: center;
+    justify-content: space-evenly;
+}
+
+.star {
+    width: 3rem;
+    height: 3rem;
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out;
+    margin-right: 5px;
+}
+
+.star:hover {
+    transform: scale(1.1);
+}
+
+.star.disable-hover:hover {
+    transform: none;
+    pointer-events: none;
+}
+
+.star.disable-pointer {
+    pointer-events: none;
+    cursor: default
+}
+
+.isRated-container {
+    height: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.isRated {
+    text-align: center;
+    font-family: "textFont";
+    font-size: 1.3rem;
+    margin-bottom: 2rem;
+}
+
+.isRated.hidden {
+    visibility: hidden;
+}
+
+
+.closeDialog {
+    cursor: pointer;
+    font-size: calc(1rem + 0.5vw);
+    border-radius: 1.2rem;
+    border: 0.2rem solid rgba(255, 255, 255, 0.896);
+    outline: 0.35rem solid hsla(0, 0%, 0%, 0.86);
+    background-color: rgba(12, 230, 164, 0.821);
+    box-shadow: 0px 5px 25px;
+    padding: 0.2rem 2rem;
+    margin-top: 0;
+    font-family: 'textFont';
+}
+
+.closeDialog:hover {
+    background-color: rgba(252, 76, 111, 0.73);
+}
+
+.closeDialog:active {
+    background-color: rgba(164, 254, 237, 0.73);
+    transform: scale(0.8);
+    transition-duration: 0.1s;
+}

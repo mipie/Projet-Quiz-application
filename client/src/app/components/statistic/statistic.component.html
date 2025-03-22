@@ -1,0 +1,69 @@
+<div class="dialog-container" [ngStyle]="{ 'background-image': backgroundImage }">
+    <h1 class="title"> {{ titleLabel }} </h1>
+    <div *ngIf="viewMode === 'Classement'" class="ranking-section container">
+        <h3> {{ leaderboard }} </h3>
+        <div class="column-header">
+            <div class="column-rank">{{ rankColumnLabel }}</div>
+            <div class="column-username" style="width: 15ch;">{{ usernameColumnLabel }}</div>
+            <div class="column-points">{{ pointsColumnLabel }}</div>
+            <div class="column-victory">{{ victoryColumnLabel }}</div>
+            <div class="column-draw">{{ drawColumnLabel }}</div>
+            <div class="column-defeat">{{ defeatColumnLabel }}</div>
+        </div>
+        <div class="scroll-bar">
+            <div class="rank-list" *ngFor="let user of users; let i = index" [ngClass]="getRankedClass(user.rankingPoints)">
+                <div class="rank-details">
+                    <div class="rank">{{ i + 1 }}</div>
+                    <div class="username" style="width: 15ch; display: flex;">{{ user.username }}</div>
+                    <div class="points">{{ user.rankingPoints }}</div>
+                    <div class="victory">{{ user.rankingW }}</div>
+                    <div class="draw">{{ user.rankingD }}</div>
+                    <div class="defeat">{{ user.rankingL }}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="stat-section container" *ngIf="viewMode === 'Statistiques'">
+        <h3> {{ titleStatistics }} </h3>
+        <div class="statistics-section">
+            <div class="statistics-list">
+                <ul style="list-style: none; ">
+                    <li *ngFor="let information of informationsStatistics; let i = index" class="statistic-item">
+                        <div class="statistic-detail">
+                            <span>{{ information.text }}</span>
+                            <span style="width: 100px; text-align: center;">{{ information.value }}</span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    
+        <h3> {{ titleHistoric }} </h3>
+        <div class="historic">
+            <div class="first-row">
+                <div class="column-name">{{ nameLabel }}</div>
+                <div class="column-result">{{ resultLabel }}</div>
+                <div class="column-date">Date</div>
+            </div>
+            <ul  class="historic-list">
+                <div *ngIf="this.allGamesPlayed.length === 0" class="noGames"> {{noHistory}}</div>
+                <li *ngFor="let game of this.allGamesPlayed; let i = index" class="historic-item">
+                    <div class="name-item">
+                        {{ game.gameName }}
+                    </div>
+                    <div class="result-item">{{ game.isWinner ? victoryLabel : defeatLabel }}</div>
+                    <div class="date-item">
+                        {{ game.date.toDate() | date: 'yyyy-MM-dd HH:mm:ss' }}
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <button *ngIf="viewMode==='Classement'" (click)="viewMode='Statistiques'" class="buttonA"> 
+        <i class="fa-solid fa-arrow-right"></i>
+    </button>
+    <button *ngIf="viewMode==='Statistiques'" (click)="viewMode='Classement'" class="buttonB">
+        <i class="fa-solid fa-arrow-left"></i>
+    </button>
+</div>

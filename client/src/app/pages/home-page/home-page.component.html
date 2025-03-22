@@ -1,0 +1,45 @@
+<div class="container" [ngStyle]="{ 'background-image': backgroundImage }" (click)="closeDropDownMenufunction()">
+    <app-chat
+        [class.isChatMinimized]="isChatMinimized"
+        [class.isChatNotMinimized]="!isChatMinimized"
+        [class.withTransition]="isInitialized"
+        (isMinimizedEvent)="onChatMinimized($event)"
+        (isWindowEvent)="onWindowChange($event)"
+        class="chat"
+    >
+    </app-chat>
+
+    <app-profile class="profile" [isDropDownMenu]="closeDropDownMenu" (isDropDownMenuChange)="onDropDownMenuChange($event)" (click)="preventEvent($event)"></app-profile>
+    <div
+        class="menu"
+        [class.isMenuMinimized]="!isChatMinimized"
+        [class.isMenuNotMinimized]="isChatMinimized"
+        [class.withTransition]="isInitialized"
+        >
+        <div class="center-container">
+            <div>
+                <h1 class="header-title">{{ title }}</h1>
+                <h1 class="header-item">{{ titleLabel }}</h1>
+            </div>
+    
+            <div class="button-box">
+                <span class="button-wrapper" (click)="openJoinGame()">
+                    <button #joinButton class="button shrink-on-active">{{ joinButtonLabel }}</button>
+                </span>
+                <span class="button-wrapper" routerLink="/createPlay" (click)="clickedButton()">
+                    <button class="button shrink-on-active">{{ createButtonLabel }}</button>
+                </span>
+                <span class="button-wrapper" routerLink="/admin" (click)="clickedButton()">
+                    <button class="button shrink-on-active">{{ adminButtonLabel }}</button>
+                </span>
+            </div>
+    
+            <footer class="footer-item">
+                <p class="team-number">{{ teamLabel }} 107</p>
+                <p class="members">
+                    <span>Kevin Habchy , Anis Ait-Kaci Ali , Michlove Pierre , Pungtzé-Sy Djoetchuang Kamdem , Ali Elmoussaoui , Farid Bakir</span>
+                </p>
+            </footer>
+        </div>
+    </div>
+</div>

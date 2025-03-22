@@ -1,0 +1,263 @@
+@font-face {
+    font-family: textFont;
+    src: url('./../../../assets/textFont.otf');
+}
+@import "~@fortawesome/fontawesome-free/css/all.css";
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-weight: 300;
+}
+
+.dialog-container {
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    justify-content: flex-start;
+    background-size: cover;
+    min-width: 600px;
+    min-height: 400px;
+    font-family: textFont;
+}
+
+.title {
+    font-family: "textFont";
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 15px;
+    align-self: center;
+    border-radius: 5px;
+    margin: 10px;
+    width: -webkit-fill-available;
+    font-size: 25px;
+}
+
+.informations {
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    justify-content: flex-start;
+    background-size: cover;
+    gap: 1rem;
+}
+
+.first-row {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    box-sizing: border-box;
+    justify-content: space-evenly;
+    height: 100px;
+}
+
+.wallet-container {
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    text-align: right;
+}
+
+.money-won {
+    padding-right: 49px;
+}
+
+.ranking-container {
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    text-align: right;
+}
+
+.rankingPoints-won {
+    padding-right: 45px;
+}
+
+.wallet-box {
+    display: flex;
+    align-items: center;
+    border-radius: 10px;
+    outline: 2px solid hsla(0, 0%, 0%, 0.86);
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 7px 10px;
+    width: -moz-fit-content;
+    width: fit-content;
+    justify-content: center;
+}
+
+.wallet-box img {
+    width: 30px;
+    height: 30px;
+    border-radius: 30px;
+}
+
+.wallet-box p {
+    font-size: 24px;
+    margin-right: 0.5rem;
+    margin-top: 4px;
+}
+
+.ranking-box {
+    display: flex;
+    align-items: center;
+    border-radius: 10px;
+    outline: 2px solid hsla(0, 0%, 0%, 0.86);
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 7px 10px;
+    width: -moz-fit-content;
+    width: fit-content;
+    justify-content: space-evenly;
+    gap: 0.4rem;
+}
+
+.ranking-box p {
+    font-size: 24px;
+    margin-top: 4px;
+}
+
+.second-row {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    justify-content: center;
+    height: 100px;
+}
+
+.experience-box {
+    display: flex;
+    align-items: center;
+    border-radius: 10px;
+    outline: 2px solid hsla(0, 0%, 0%, 0.86);
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 7px 10px;
+    width: -moz-fit-content;
+    width: fit-content;
+    justify-content: space-evenly;
+}
+
+.progress-container {
+    display: flex;
+    width: 330px;
+    background-color: #e0e0e0;
+    border-radius: 8px;
+    height: 30px;
+    box-shadow: 0px 0px 5px black;
+}
+
+.progress-bar {
+    height: 100%;
+    width: 40%;
+    background: repeating-linear-gradient(45deg, rgb(102, 187, 106), rgb(69 161 73) 10px, rgb(102, 187, 106) 10px, rgb(104 206 109) 20px);
+    text-align: center;
+    color: white;
+    line-height: 30px;
+    font-weight: bold;
+    transition: width 0.5s ease;
+    border-radius: 8px;
+}
+
+.level-text {
+    font-family: textFont;
+    color: black;
+    display: flex;
+    align-items: center;
+    width: 325px;
+    justify-content: space-between;
+}
+
+.xp-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 5px;
+}
+
+.xp-text {
+    display: flex;
+    color: black;
+}
+
+.third-row {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    box-sizing: border-box;
+    justify-content: center;
+    height: 90px;
+}
+
+.button-box {
+    justify-content: space-between;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.shrink-on-active {
+    transition-duration: 0.1s;
+}
+
+.shrink-on-active:active {
+    transform: scale(0.8);
+}
+
+.button {
+    cursor: pointer;
+    text-align: center;
+    font-family: textFont;
+    font-size: calc(1em + 0.5vw);
+    border-radius: 1.2rem;
+    border: 0.2rem solid rgba(255, 255, 255, 0.896);
+    outline: 0.35rem solid hsla(0, 0%, 0%, 0.86);
+    background-color: rgba(12, 230, 164, 0.821);
+    box-shadow: 0px 5px 25px;
+    width: 100%;
+}
+
+.button:hover {
+    background-color: rgba(252, 76, 111, 0.73);
+}
+
+.button:active {
+    background-color: rgba(164, 254, 237, 0.73);
+}
+
+.button-wrapper {
+    width: 100px;
+    display: flex;
+}
+
+::-webkit-scrollbar {
+    position: relative;
+    left: 10;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(7, 7, 7, 0.5);
+    border-radius: 12px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(7, 7, 7, 0.6);
+}
+
+::-webkit-scrollbar-thumb:active {
+    background: rgba(7, 7, 7, 0.7);
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(211, 211, 211, 0);
+}
+
+::-webkit-scrollbar {
+    width: 15px;
+}
+
+.ranking-box .fa {
+    display: inline-block;
+    font: normal normal normal 14px / 1 FontAwesome;
+    font-size: 1.5rem;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+}

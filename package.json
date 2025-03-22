@@ -1,0 +1,16 @@
+{
+  "dependencies": {
+    "firebase-admin": "^12.7.0"
+    "browser-image-compression": "^2.0.2",
+    "@firebase/analytics": "^0.10.8",
+    "@firebase/app": "^0.10.12",
+    "@firebase/auth": "^1.7.9",
+    "@firebase/database": "^1.0.8",
+    "@firebase/firestore": "^4.7.3",
+    "@firebase/functions": "^0.11.8",
+    "@firebase/messaging": "^0.12.11",
+    "@firebase/storage": "^0.13.2",
+    "@fortawesome/fontawesome-free": "^6.7.1",
+    "browser-image-compression": "^2.0.2"
+  }
+}

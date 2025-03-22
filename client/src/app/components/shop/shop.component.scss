@@ -1,0 +1,253 @@
+@font-face {
+    font-family: textFont;
+    src: url('./../../../assets/textFont.otf');
+}
+@import "~@fortawesome/fontawesome-free/css/all.css";
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-weight: 300;
+}
+
+.dialog-container {
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    justify-content: flex-start;
+    background-size: cover;
+    min-width: 700px;
+    min-height: 600px;
+}
+
+.title {
+    font-family: "textFont";
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 15px;
+    align-self: center;
+    border-radius: 5px;
+    margin: 10px;
+    width: -webkit-fill-available;
+    font-size: 25px;
+}
+
+.container {
+    flex-grow: 1;
+    margin: 10px;
+    margin-top: 0;
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px 10px 0 0;
+    background-color: rgba(255, 255, 255, 0.3);
+}
+
+
+.button-container {
+    display: flex;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.button-container span {
+    flex: 1;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.8);
+    color: black;
+    text-align: center;
+    transition: background-color 0.3s ease;
+    font-family: textFont;
+    font-size: 30px;
+}
+
+.dialog-container .wallet-box {
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: fit-content;
+    margin-left: auto;
+    margin-top: 10px;
+    margin-right: 10px;
+    padding: 5px 10px;
+    height: 41px;
+    outline: 2px solid hsla(0, 0%, 0%, 0.86);
+}
+
+.fa-wallet{
+    font-size: 20px;
+}
+
+.dialog-container .wallet-box img {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    text-align: center;
+}
+
+.dialog-container .wallet-box p {
+    font-size: 24px;
+    font-family: textFont;
+    margin-right: 7px;
+    margin-left: 7px;
+    margin-top: 2.5px;
+}
+
+.dialog-container .list-container {
+    display: flex;
+    flex-direction: column;
+    font-family: textFont;
+    font-size: 18px;
+    flex-grow: 1;
+    max-width: 700px;
+    padding: 20px;
+    padding-top: 0;
+    padding-bottom: 15px;
+    justify-content: space-evenly;
+}
+
+h3 {
+    margin: 15px;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+.blur{
+    position: absolute;
+    background-color: #ffffff;
+    filter: blur(10px);
+    border-radius: 5px;
+    width: 90px;
+    height: 2ch;
+    bottom: 10px;
+    left: 0px;
+}
+.price{
+    position: absolute;
+    bottom: 10px;
+    width: 90px;
+    left: 0px;
+}
+.shop-item {
+    position: relative;
+}
+.item-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0 0 20px rgb(255 255 255);
+    cursor: pointer;
+    height: 90px;
+    width: 90px;
+    border-radius: 50%;
+    text-align: center;
+}
+
+.item-content img {
+    width: 105px;
+    height: 90px;
+    width: 90px;
+    border-radius: 50%;
+}
+
+.item-content.selected {
+    box-shadow: 0 0 20px rgb(0 0 0);
+    outline: 3px solid #0000009e;
+}
+
+.avatar-list, .theme-list {
+    list-style: none;
+}
+
+.avatar-list ul, .theme-list ul {
+    list-style: none;
+    display: flex;
+    gap: 25px;
+    overflow-y: hidden;
+    padding: 20px;
+    margin: 0 20px 0px 20px;
+}
+
+.button-user {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.button-box {
+    justify-content: space-between;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.shrink-on-active {
+    transition-duration: 0.1s;
+}
+
+.shrink-on-active:active {
+    transform: scale(0.8);
+}
+
+.button {
+    cursor: pointer;
+    text-align: center;
+    font-family: textFont;
+    font-size: calc(1em + 0.5vw);
+    padding: 0.2rem;
+    border-radius: 1.2rem;
+    border: 0.2rem solid rgba(255, 255, 255, 0.896);
+    outline: 0.35rem solid hsla(0, 0%, 0%, 0.86);
+    background-color: rgba(12, 230, 164, 0.821);
+    box-shadow: 0px 5px 25px;
+    width: 100%;
+}
+
+.purchased {
+    color: rgba(169, 169, 169, 1);
+    opacity: 0.4;
+    pointer-events: none;
+}
+
+.button:hover {
+    background-color: rgba(252, 76, 111, 0.73);
+}
+
+.button:active {
+    background-color: rgba(164, 254, 237, 0.73);
+}
+
+.button-wrapper {
+    width: 265px;
+    margin: 1rem;
+    display: flex;
+}
+
+::-webkit-scrollbar {
+    position: relative;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(7, 7, 7, 0.5);
+    border-radius: 12px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(7, 7, 7, 0.6);
+}
+
+::-webkit-scrollbar-thumb:active {
+    background: rgba(7, 7, 7, 0.7);
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(211, 211, 211, 0);
+}
+
+::-webkit-scrollbar {
+    width: 15px;
+}

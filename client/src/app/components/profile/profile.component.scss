@@ -1,0 +1,213 @@
+.profile-section {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    width: 13ch;
+    align-items: center;
+    z-index: 1;
+    position: relative;
+}
+
+.userName {
+    font-size: 1.1em;
+    color: black;
+    text-align: center;
+    transition: margin-left 0.3s ease;
+    max-width: 74px;
+    word-wrap: break-word;
+}
+
+.dropdown-menu {
+    position: absolute;
+    right: 30px;
+    border-radius: 0.5rem;
+    padding: 1px;
+    text-align: center;
+    cursor: pointer;
+    width: 210px;
+    top: 90px;
+}
+
+.dropdown-menu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    border-radius: 0.5rem;
+}
+
+.dropdown-menu ul li {
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    background-color: white;
+    cursor: pointer;
+    text-align: left;
+    font-family: textFont;
+    font-size: 20px;
+    margin-top: 5px;
+    border-radius: 5px;
+    box-shadow: 0px 5px 10px;
+}
+
+.dropdown-menu ul li img {
+    width: 25px;
+    height: 25px;
+    margin-right: 10px;
+}
+
+.circle-notifiaction {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: red;
+    color: white;
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+    font-size: 16px;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+.dropdown-menu ul li:hover {
+    background-color: rgb(236, 91, 91);
+}
+
+.dropdown-menu ul li:last-child {
+    border-bottom: none;
+}
+
+.button-user-profile {
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: rgba(12, 230, 164, 0.821);
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: 0.2rem solid rgba(255, 255, 255, 0.896);
+    outline: 0.35rem solid hsla(0, 0%, 0%, 0.86);
+    box-shadow: 0px 5px 25px;
+    cursor: pointer;
+    transition: transform 0.1s;
+}
+
+.button-user-profile:hover {
+    background-color: rgba(252, 76, 111, 0.73);
+}
+
+.button-user-profile:active {
+    background-color: rgba(164, 254, 237, 0.73);
+}
+
+p {
+    font-family: textFont;
+}
+
+.circle-notifiaction-user {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: hsl(0deg 100% 50% / 97%);
+    color: white;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    font-size: 16px;
+    position: absolute;
+    top: 0;
+    right: 20px;
+}
+
+.progress-avatar-container {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    position: relative;
+}
+
+.level-text {
+    font-family: textFont;
+    color: black;
+    transform: translate(145px, -45px);
+    width: 100px;
+}
+
+.xp-text {
+    position: absolute;
+    margin-left: 10px;
+    margin-top: 2px;
+    font-family: textFont;
+    display: flex;
+    align-items: center;
+    color: black;
+    font-family: textfont;
+    width: max-content;
+    top: 5px;
+    right: 120px;
+}
+
+.progress-container {
+    display: flex;
+    width: 330px;
+    background-color: #e0e0e0;
+    border-radius: 8px;
+    overflow: hidden;
+    height: 30px;
+    margin-right: 10px;
+    transform: translate(40px, -20px);
+    box-shadow: 0px 0px 5px black;
+}
+
+.progress-bar {
+    height: 100%;
+    width: 40%;
+    background: repeating-linear-gradient(45deg, rgb(102, 187, 106), rgb(69 161 73) 10px, rgb(102, 187, 106) 10px, rgb(104 206 109) 20px);
+    text-align: center;
+    color: white;
+    line-height: 30px;
+    font-weight: bold;
+    transition: width 0.3s ease;
+    border-radius: 8px;
+}
+
+.to-scroll-dialog {
+    overflow: auto;
+}
+
+.wallet-box {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    border-radius: 10px;
+    outline: 2px solid hsla(0, 0%, 0%, 0.86);
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 7px 10px;
+    width: fit-content;
+    justify-content: center;
+    gap: 5px;
+    top: -8px;
+    right: 100px;
+    height: 18px;
+}
+
+.wallet-box img {
+    width: 18px;
+    height: 18px;
+    border-radius: 30px;
+}
+
+.wallet-box p {
+    font-size: 17px;
+}
+
+.wallet-box .fa {
+    font-size: 20px;
+    display: inline-block;
+    font: normal normal normal 14px / 1 FontAwesome;
+    font-size: 17px;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+}

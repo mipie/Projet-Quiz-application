@@ -1,0 +1,42 @@
+<div class="dialog-container" [ngStyle]="{ 'background-image': backgroundImage }">
+    <h1 class="title">Récompenses</h1>
+    <div class="informations">
+        <div class="first-row">
+            <div class="wallet-container">
+                <p class="money-won">+{{ moneyWon }}</p>
+                <div class="wallet-box">
+                    <p>{{ wallet }}</p>
+                    <img src="./assets/pieces.png" />
+                </div>
+            </div>
+            <div class="ranking-container">
+                <p class="rankingPoints-won">+{{ rankingPointsWon }}</p>
+                <div class="ranking-box">
+                    <p>{{ rankingPoints }}</p>
+                    <i class="fa" [ngClass]="'fa-trophy'"> </i>
+                </div>
+            </div>
+        </div>
+        <div class="second-row">
+            <div class="level-text">
+                <p>{{lvlLabel}}: {{ lvlValue }}</p>
+                <p>+{{experienceWon}} EXP</p>
+                <p>{{lvlLabel}}: {{ lvlValue + 1 }}</p>
+            </div>
+            <div class="progress-container">
+                <div class="progress-bar" [ngStyle]="{ width: this.xpValue + '%' }">                 
+                </div>
+            </div>
+            <div class="xp-container">
+                <p class="xp-text">{{ xpValue }}/100</p>  
+            </div>
+        </div>
+        <div class="third-row">
+            <div class="button-box">
+                <span class="button-wrapper" (click)="buttonClose()">
+                    <button #joinButton class="button shrink-on-active">OK</button>
+                </span>
+            </div>
+        </div> 
+    </div>
+</div>

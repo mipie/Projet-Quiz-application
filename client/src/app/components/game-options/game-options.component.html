@@ -1,0 +1,37 @@
+<div class="dialog-container" [ngStyle]="{ 'background-image': backgroundImage }">
+    <div class="title">
+        <h1>{{ titleLabel }}</h1>
+    </div>
+    <div class="container">
+        <div class="options-mode">
+            <div
+                *ngFor="let mode of listTypeMode"
+                class="mode enlarge-on-hover"
+                (click)="selectedMode($event)"
+                [class.disabled]="!isAccessRanked && mode.image === 'fa-trophy'"
+                [ngStyle]="{
+                    'padding-top': !isAccessRanked ? '12px' : '0px'
+                }"
+            >
+                <i class="fa" [ngClass]="mode.image"> </i>
+                {{ mode.name }}
+                <div *ngIf="mode.image === 'fa-trophy' && !isAccessRanked" class="ranked-message">
+                    {{ notQRLmessage }}
+                </div>
+            </div>
+        </div>
+        <div class="options-price">
+            <h2>{{ entranceFeeLabel }}</h2>
+            <input [(ngModel)]="selectedPriceValue" placeholder="0" maxlength="10" (input)="numbersOnly($event)" />
+        </div>
+    </div>
+
+    <div class="button-box">
+        <span class="button-wrapper" (click)="buttonClickedCreate()" [class.disabled]="!selectedModeValue">
+            <button class="button shrink-on-active" [class.disabled]="!selectedModeValue">{{ confirmLabel }}</button>
+        </span>
+        <span class="button-wrapper" (click)="buttonClickedCancel()">
+            <button class="button shrink-on-active">{{ cancelLabel }}</button>
+        </span>
+    </div>
+</div>

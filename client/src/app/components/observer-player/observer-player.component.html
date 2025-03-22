@@ -1,0 +1,127 @@
+<div class="background" *ngIf="isNext && !isWaitingOrganizer">
+    <div id="next-q-countdown-container" class="justified">
+        <p id="next-q-countdown">{{ timer }}s</p>
+    </div>
+</div>
+
+<div class="play-area" [ngStyle]="{ 'background-image': backgroundImage }">
+        <app-chat
+        [class.isChatMinimized]="isChatMinimized"
+        [class.isChatNotMinimized]="!isChatMinimized"
+        [class.withTransition]="isInitialized"
+        (isMinimizedEvent)="onChatMinimized($event)"
+        (isWindowEvent)="onWindowChange($event)"
+        class="chat"
+    >
+    </app-chat>
+    <div class="question-box" [class.isMenuMinimized]="!isChatMinimized" [class.isMenuNotMinimized]="isChatMinimized"  [class.withTransition]="isInitialized">
+        <div class="question-title">
+            <h1 class="question-number">{{ questionIndex + 1 }}. {{ question.text }} ({{ question.points }} points)</h1>
+        </div>
+
+        <div *ngIf="question.type === 'QCM'" class="choices-field">
+            <button
+                *ngFor="let each of question.choices; let i = index"
+                class="answer"
+                [disabled]=true
+                [class.isBadAnswer]="!rightAnswer && isShowResult"
+                [class.isGoodAnswer]="each.isCorrect && isShowResult"
+                [class.wasSelected]="isShowResult && selectedChoices[i]"
+                [class.selected]="selectedChoices[i]"
+            >
+                <span>{{ i + 1 }}. {{ each.text }}</span>
+            </button>
+        </div>
+
+        <div *ngIf="question.type === 'QRL'" class="answer-field">
+            <textarea
+                #textArea
+                class="textarea"
+                type="text"
+                oninput='this.style.height = ""; this.style.height = Math.min(this.scrollHeight + 10, 300) + "px"'
+                maxlength="200"
+                [ngModelOptions]="{ standalone: true }"
+                [(ngModel)]="longAnswer"
+                placeholder="{{ qrlPlaceholder }}"
+                [disabled]=true
+                autofocus
+            >
+            </textarea>
+            <span id="character-count">{{ remainingTextCount }}</span>
+        </div>
+        <div *ngIf="isQRE" class="slider-container">
+            <div class="slide">
+                <span class="interval">{{ question.qre?.lowerBound }}</span>
+                <input
+                    #slider
+                    class="slider"
+                    type="range"
+                    [min]="question.qre?.lowerBound"
+                    [max]="question.qre?.upperBound"
+                    [(ngModel)]="sliderValue"
+                    [disabled]=true
+                    tabindex="0"
+                />
+                <span class="interval">{{ question.qre?.upperBound }}</span>
+            </div>
+            <p class="valueSelect">{{ selectedValue }} : {{ sliderValue }}</p>
+            <p class="Margin">{{ margin }} : ± {{ marginValue(question.qre?.margin!) }}</p>
+        </div>
+        <button class="button-wrapper-confirm-button">
+            <button [class.confirm-button]="false" [class.shrink-on-active]="false" [class.disabled]="true">{{ confirm }}</button>
+        </button>
+    </div>
+    <div class="main-side-info">
+        <div class="side-info">
+            <div class="image-box" *ngIf="question.imageUrl![0]">
+                <link rel="preload" href="question.imageUrl![0]" as="image" />
+                <img *ngIf="question.imageUrl![0]" [src]="question.imageUrl![0]" loading="lazy" />
+            </div>
+            <div class="time-points-box">
+                <span class="added-points" *ngIf="isQCM && isShowResult" [class.zero]="!rightAnswer" [class.hundred]="rightAnswer"
+                    >+{{ gainedPoints }} points!</span>
+                <div class="total-points">
+                    <div>{{ totalPoints }} points</div>
+                </div>
+                <div class="time" [style.text-shadow]="isPaused ? '0 0 50px rgb(114, 232, 247)' : isPanicMode ? '0 0 50px rgb(176 23 54)' : 'none'">
+                    <div
+                        [style.color]="isPaused ? 'rgb(49, 146, 159)' : isPanicMode ? 'rgb(194, 21, 56)' : timer! > 10 ? 'black' : 'rgba(144, 28, 51)'"
+                        *ngIf="!(isNext && !isWaitingOrganizer)"
+                    >
+                        {{ timer }}s
+                    </div>
+                </div>
+            </div>
+            <div class="game-message">
+                <div *ngIf="isPaused" class="pause info">{{ pause }}</div>
+                <div *ngIf="isPanicMode && !isPaused" class="panic info">{{ panicMode }}</div>
+                <p class="info" *ngIf="isWaiting">{{ waitOthers }}</p>
+                <p class="info" *ngIf="!isWaitingOrganizer && !isWaiting && !isNext && disable">{{ organiserEvaluate }}</p>
+                <p class="info" *ngIf="isWaitingOrganizer">{{ organiserNext }}</p>
+                <p class="info bonus" *ngIf="isQCM && needBonus && isShowResult">{{ firstBonus }}</p>
+                <p class="info bonus" *ngIf="isQRE && needBonus && isShowResult">
+                    {{ bonus }}
+                </p>
+            </div>
+        </div>
+        <div class="leaderboard-container">
+            <span class="quit-button-wrapper" (click)="quitGame()">
+                <button class="button shrink-on-active" id="quit-button">
+                    <i class="fas fa-sign-out"></i>
+                </button>
+            </span>
+            <div class="leaderboard">
+                <app-player-list [isObserver]="true"></app-player-list>
+            </div>
+            <div class="org-div">
+                <span class="go-to-org">Organisteur</span>
+                <span class="org-button-wrapper" (click)="this.observerService.changeObserver('Organisateur')">
+                    <button class="button shrink-on-active" id="org-button">
+                        <i class="fa fa-eye"></i>
+                    </button>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+

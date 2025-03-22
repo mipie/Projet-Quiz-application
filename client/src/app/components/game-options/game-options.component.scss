@@ -1,0 +1,182 @@
+@font-face {
+    font-family: textFont;
+    src: url('./../../../assets/textFont.otf');
+}
+
+.dialog-container {
+    width: 800px;
+    height: 500px;
+    justify-content: center;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    background-size: cover;
+    border: 0.5rem solid rgba(0, 0, 0, 0.896);
+    border-radius: 3px;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.title {
+    width: 600px;
+    height: 50px;
+    font-size: 14px;
+    font-family: textFont;
+    text-align: center;
+}
+
+.options-mode {
+    width: 600px;
+    height: 150px;
+    font-size: 5px;
+    font-family: textFont;
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 10px;
+    align-items: center;
+}
+
+.mode {
+    cursor: pointer;
+    border-radius: 1rem;
+    background-color: rgba(255, 255, 255, 0.77);
+    display: flex;
+    justify-content: space-between;
+    margin: 0.5rem 1.2rem;
+    padding-right: 20px;
+    padding-left: 20px;
+    border: solid 1px black;
+    box-shadow: 0 0 5px;
+    width: 10rem;
+    height: 8rem;
+    justify-content: space-evenly;
+    align-items: center;
+    font-size: 24px;
+    flex-direction: column;
+}
+
+.mode i {
+    font-size: 3rem;
+}
+
+.mode .fa-solid .fa-circle-check {
+    font-size: 1rem;
+    display: inline-block;
+    font: normal normal normal 14px / 1 FontAwesome;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+}
+
+.mode.selected {
+    border: 5px solid rgba(12, 230, 164, 0.821);
+    box-shadow: 0 0 20px rgba(12, 230, 164, 0.821);
+    background-image: url('./../../../assets/selectedMode.png');
+    background-position: top right;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-size: 25px 25px;
+}
+
+.mode:hover {
+    cursor: pointer;
+    background-color: rgba(255, 255, 255, 0.95);
+}
+
+.enlarge-on-hover {
+    transition-duration: 0.1s;
+}
+
+.enlarge-on-hover:hover {
+    transform: scale(1.01);
+}
+
+.options-price {
+    font-size: 12px;
+    font-family: textFont;
+    text-align: center;
+}
+
+.options-price input {
+    border: solid 1px black;
+    border-radius: 1.2rem;
+    text-align: center;
+    font-family: textFont;
+    font-size: 20px;
+    width: 10rem;
+    height: 3rem;
+}
+
+.button-box {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    gap: 120px;
+    height: 70px;
+    margin-top: 2rem;
+}
+
+.button-wrapper {
+    width: 265px;
+    margin: 1rem;
+    display: flex;
+}
+
+.button {
+    cursor: pointer;
+    text-align: center;
+    font-family: textFont;
+    font-size: calc(1em + 0.5vw);
+    border-radius: 1.2rem;
+    border: 0.2rem solid rgba(255, 255, 255, 0.896);
+    outline: 0.35rem solid hsla(0, 0%, 0%, 0.86);
+    background-color: rgba(12, 230, 164, 0.821);
+    box-shadow: 0px 5px 25px;
+    width: 100%;
+}
+
+.button:hover {
+    background-color: rgba(252, 76, 111, 0.73);
+}
+
+.button:active {
+    background-color: rgba(164, 254, 237, 0.73);
+}
+
+.shrink-on-active {
+    transition-duration: 0.1s;
+}
+
+.shrink-on-active:active {
+    transform: scale(0.8);
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.mode.disabled {
+    pointer-events: none;
+    background-color: rgba(175, 175, 175, 1);
+}
+
+.ranked-message {
+    font-family: 'textFont';
+    font-size: 12px;
+    color: red;
+}
+
+.disabled {
+    cursor: pointer;
+    pointer-events: none;
+    opacity: 0.6;
+    box-shadow: none;
+}

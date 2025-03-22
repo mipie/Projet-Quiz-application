@@ -1,0 +1,22 @@
+<div class="container-evaluation" [ngStyle]="{ 'background-image': backgroundImage }">
+    <div>
+        <div class="title-container">
+            <span>{{ titleLabel }}</span>
+        </div>
+        <div class="game-name">
+            <span>{{rateLabel}} {{ gameName }}.</span>  
+        </div>
+        <div class="evaluation-star">
+            <img class="star"
+                 *ngFor="let star of stars; let i = index"
+                 [src]="star"
+                 [ngClass]="{'disable-hover': isRated, 'disable-pointer': isRated}"
+                 (click)="onRateGame(i + 1)"
+                 >
+        </div>
+        <div class="isRated-container">
+            <span class="isRated" [class.hidden]="!isRated">{{ evaluatedLabel }}</span>
+            <button class="closeDialog" (click)="redirectToHome()">OK!</button>
+        </div>
+    </div>
+</div>

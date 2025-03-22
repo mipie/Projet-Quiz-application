@@ -1,0 +1,88 @@
+<div class="background" *ngIf="isGameBegin">
+    <div id="countdown-container" class="justified">
+        <p id="countdown">{{ time }}s</p>
+    </div>
+</div>
+<div class="host-background" [ngStyle]="{ 'background-image': backgroundImage }">
+    <div class="main-container host-background" [class.filter]="isRoomLocked">
+        <app-chat
+            [class.isChatMinimized]="isChatMinimized"
+            [class.isChatNotMinimized]="!isChatMinimized"
+            [class.withTransition]="isInitialized"
+            (isMinimizedEvent)="onChatMinimized($event)"
+            (isWindowEvent)="onWindowChange($event)"
+            class="chat"
+        >
+        </app-chat>
+        <div
+            class="menu"
+            [class.isMenuMinimized]="!isChatMinimized"
+            [class.isMenuNotMinimized]="isChatMinimized"
+            [class.withTransition]="isInitialized"
+        >
+            <div class="container justified">
+                <div class="titles justified">
+                    <h1 class="header-title">{{ invitePlayers }}</h1>
+                    <span class="header-item"> {{ titleGame }} : {{ game }}</span>
+                    <span class="header-item">{{ codeRoom }}: {{ code }}</span>
+                    <div class="header-price">
+                        <span class="header-item">{{ titlePrice }}: {{ price }}</span>
+                        <img [src]="'./assets/pieces.png'" />
+                    </div>
+                </div>
+                <div class="players-container">
+                    <div class="player enlarge-on-hover" *ngFor="let player of players; let i = index">
+                        <img *ngIf="i !== 0" class="avatar" [src]="player.avatar" />
+                        {{ player.username }}
+                        <i *ngIf="isOrganizer && i !== 0" id="ban" class="fa fa-ban" (click)="banPlayer(i)"></i>
+                    </div>
+                </div>
+                <span id="locked-message" *ngIf="isRoomLocked && !isOrganizer">{{ lockRoom }}</span>
+                <div class="info">
+                    <span class="players-count"> {{ players.length - 1 }} participant<span *ngIf="players.length > 2">s</span></span>
+                    <div id="banned-title">
+                        {{ bannedNamesLabel }}: <br />
+                        <span class="banned" *ngFor="let ban of bannedNames">
+                            {{ ban }}
+                        </span>
+                    </div>
+                </div>
+                <div class="interation-container justified" *ngIf="isOrganizer">
+                    <span class="lock button-wrapper" (click)="buttonClick(); toggleLock()">
+                        <button
+                            [disabled]="disable || (mode !== 'fa-trophy' && players.length < 2) || (mode === 'fa-trophy' && players.length !== 3)"
+                            [class.block-begin]="
+                                disable || (mode !== 'fa-trophy' && players.length < 2) || (mode === 'fa-trophy' && players.length !== 3)
+                            "
+                            class="lock-button shrink-on-active"
+                            title="{{ onePlayerLock }}"
+                            autofocus
+                        >
+                            <i [ngClass]="{ fa: true, 'fa-lock': isRoomLocked, 'fa-unlock': !isRoomLocked }"></i>
+                        </button>
+                    </span>
+                    <span class="button-wrapper" (click)="buttonClick(); organizerBegin()">
+                        <button
+                            class="button shrink-on-active"
+                            [disabled]="!isRoomLocked || disable || players.length < 2"
+                            [class.block-begin]="!isRoomLocked || disable || players.length < 2"
+                            title="{{ oneLockRoom }}"
+                        >
+                            {{ start }}
+                        </button>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="mini-game">
+            <app-minigame [language]="language"></app-minigame>
+            <div class="button-chat">
+                <span class="quit-button-wrapper" (click)="buttonClick(); quitGame()">
+                    <button class="button shrink-on-active" id="quit-button">
+                        <i class="fas fa-sign-out"></i>
+                    </button>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>

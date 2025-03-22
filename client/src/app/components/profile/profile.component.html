@@ -1,0 +1,36 @@
+<div class="top-left-container">
+    <div class="progress-avatar-container">
+        <div class="level-text">
+            {{lvlLabel}}: {{ lvlValue }}
+        </div>
+        <div class="wallet-box">
+            <i class="fa" [ngClass]="'fa-wallet'"></i>
+            <p>{{ wallet }}</p>
+            <img src="./assets/pieces.png" />
+        </div>
+        <div class="progress-container">
+            <div class="progress-bar" [ngStyle]="{ width: this.xpValue + '%', color: xpValue === 0 ? 'black' : 'white' }"></div>
+            <span class="xp-text">{{ xpValue }}/100 </span>
+        </div>
+        <div class="profile-section">
+            <button class="button-user-profile" [style.backgroundImage]="'url(' + currentUserAvatar + ')'" (click)="dropDownMenu()">
+                <div class="circle-notifiaction-user" *ngIf="numberFriendNotifications > 0"></div>
+            </button>
+            <p>{{ currentUser?.username }}</p>
+            <div class="dropdown-menu" *ngIf="isDropDownMenu">
+                <ul>
+                    <li (click)="buttonAddFriends()">
+                        <img src="./assets/addFriends.png" />{{ friendsLabel }}
+                        <div class="circle-notifiaction" *ngIf="numberFriendNotifications > 0">
+                            {{ numberFriendNotifications }}
+                        </div>
+                    </li>
+                    <li (click)="buttonShop()"><img src="./assets/themeImage.png" />{{ storeLabel }}</li>
+                    <li (click)="buttonStatistics()"><img src="./assets/trophy.png" />{{ statisticsLabel }}</li>
+                    <li (click)="buttonSettings()"><img src="./assets/settingsImage.png" />{{ settingsLabel }}</li>
+                    <li (click)="buttonLogOut()"><img src="./assets/logoutImage.png" />{{ logoutLabel }}</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

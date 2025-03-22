@@ -1,0 +1,12 @@
+<div class="container">
+    <canvas id="myChart"></canvas>
+    <div class="choices-field" *ngIf="isQCM">
+        <div *ngFor="let each of choices;let i = index"
+            class="answer" 
+            [class.isBadAnswer]="!each.isCorrect"
+            [class.isGoodAnswer]="each.isCorrect"
+            >
+                <span>{{ i + 1 }}. {{ each.text }}</span>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,168 @@
+@font-face {
+    font-family: titleFont;
+    src: url(./../../../assets/headerFont.otf);
+}
+
+@font-face {
+    font-family: textFont;
+    src: url(./../../../assets/textFont.otf);
+}
+
+.container {
+    //background-image: url('./../../../assets/mainPage.jpg');
+    background-size: cover;
+    min-width: 900px;
+    min-height: 550px;
+    height: 100vh;
+    display: flex;
+    position: relative;
+}
+
+.chat {
+    z-index: 20;
+    grid-area: chat;
+    height: max(100vh, 550px);
+    max-width: 400px;
+    flex-grow: 1;
+}
+
+.menu {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex-grow: 1;
+}
+
+.button-user {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.button-box {
+    justify-content: space-between;
+    margin-bottom: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.shrink-on-active {
+    transition-duration: 0.1s;
+}
+
+.shrink-on-active:active {
+    transform: scale(0.8);
+}
+
+.button {
+    cursor: pointer;
+    text-align: center;
+    font-family: textFont;
+    font-size: calc(1em + 0.5vw);
+    padding: 0.75rem;
+    border-radius: 1.2rem;
+    border: 0.2rem solid rgba(255, 255, 255, 0.896);
+    outline: 0.35rem solid hsla(0, 0%, 0%, 0.86);
+    background-color: rgba(12, 230, 164, 0.821);
+    box-shadow: 0px 5px 25px;
+    width: 100%;
+}
+
+.button:hover {
+    background-color: rgba(252, 76, 111, 0.73);
+}
+
+.button:active {
+    background-color: rgba(164, 254, 237, 0.73);
+}
+
+.button-wrapper {
+    width: 265px;
+    margin: 1rem;
+    display: flex;
+}
+
+.team-number {
+    font-weight: 900;
+    margin-top: 0.25em;
+    margin-bottom: 0.25em;
+    font-size: 1.5em;
+}
+
+.header-title {
+    justify-content: center;
+    text-align: center;
+    font-family: titleFont;
+    font-size: max(calc(40px + 7vh), 70px);    
+    font-weight: bold;
+    text-shadow: lightgoldenrodyellow 10px 10px 100px;
+    margin: 0;
+    color: black;
+}
+
+.header-item {
+    justify-content: center;
+    text-align: center;
+    font-family: textFont;
+    font-size: 2rem;
+    font-weight: lighter;
+    color: black;
+    margin: 0;
+}
+
+.footer-item {
+    text-align: center;
+    font-family: textFont;
+    color: black;
+    font-weight: lighter;
+    margin-left: 2ch;
+    margin-right: 2ch;
+}
+.isChatMinimized {
+    transform: translate(-99%);
+}
+
+.isChatMinimized.withTransition {
+    transition: transform 0.5s ease;
+}
+
+.isChatNotMinimized.withTransition {
+    transition: transform 0.5s ease;
+}
+
+.isMenuMinimized.withTransition {
+    transition: transform 0.5s ease;
+}
+
+.isMenuNotMinimized {
+    transform: translate(-17%);
+}
+
+.isMenuNotMinimized.withTransition {
+    transition: transform 0.5s ease;
+}
+
+.profile {
+    display: flex;
+    justify-content: end;
+    position: absolute;
+    top: 20px;
+    right: 0;
+}
+
+.members {
+    margin: 0;
+}
+
+.center-container { 
+    margin-top: 80px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}

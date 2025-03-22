@@ -1,0 +1,220 @@
+@font-face {
+    font-family: textFont;
+    src: url(./../../../assets/textFont.otf);
+}
+@font-face {
+    font-family: titleFont;
+    src: url(./../../../assets/headerFont.otf);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.content {
+    width: 100%;
+    min-width: 900px;
+    height: 40ch;
+    padding: 1em;
+    background-color: rgba(0, 0, 0, 0.3);
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    box-shadow: 0px 0px 5px;
+}
+
+.content h1 {
+    font-family: textFont;
+    color: black;
+    opacity: 0.9;
+    text-align: center;
+    font-weight: lighter;
+    font-size: 30px;
+    -webkit-text-stroke: black 0.02rem;
+    text-shadow: 0px 0px 10px white;
+}
+
+.input-box {
+    display: flex;
+    align-items: center;
+}
+
+.format input {
+    width: 100%;
+    height: 3rem;
+    font-size: 1.3rem;
+    text-align: center;
+    border: solid 4px black;
+    border-radius: 1rem;
+    font-family: textFont;
+    padding: 1rem;
+    padding-right: 3rem;
+    padding-left: 3rem;
+}
+
+p {
+    text-align: center;
+    color: rgb(255, 255, 255);
+    font-size: 20px;
+    font-family: textFont;
+    height: 20px;
+    margin-top: 0.5rem;
+}
+
+.visibility {
+    padding: 0.5rem 1rem;
+    font-size: 1.5rem;
+    margin-left: -3.5rem;
+    margin-top: 0.3rem;
+    background-color: transparent;
+    border: none;
+}
+
+.visibility:hover {
+    cursor: pointer;
+}
+
+.error-message {
+    position: absolute;
+    top: 13.5rem;
+    font-size: 17px;
+    font-weight: 500;
+    font-family: textFont;
+    color: rgb(255, 116, 116);
+    -webkit-text-stroke: black 0.02rem;
+}
+
+.focus-Background {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-image: url(./../../../assets/presentationBackground.jpg);
+    background-size: cover;
+    min-width: 900px;
+    min-height: 700px;
+}
+
+.button-close {
+    cursor: pointer;
+    position: absolute;
+    right: 1rem;
+    top: 1rem;
+    color: white;
+    background-color: rgba(255, 72, 72, 0.779);
+    border: 2px solid rgb(255, 255, 255);
+    border-radius: 15px;
+    outline: solid black 0.2rem;
+    width: 1.5em;
+    height: 1.5em;
+    font-size: 20px;
+    font-family: textFont;
+}
+
+.button-close:hover {
+    background-color: rgba(250, 26, 26, 0.779);
+}
+
+.button-close:active {
+    background-color: rgba(255, 130, 157, 0.79);
+}
+
+.button-LogIn {
+    cursor: pointer;
+    text-align: center;
+    font-family: textFont;
+    padding: 0.5rem;
+    border: 0.2rem solid rgba(255, 255, 255, 0.896);
+    outline: 0.35rem solid hsla(0, 0%, 0%, 0.7);
+    background-color: rgba(12, 230, 164, 0.821);
+    border-radius: 1rem;
+    width: 13rem;
+    opacity: 0.9;
+    font-size: 20px;
+}
+
+.button-LogIn:hover {
+    background-color: rgba(252, 76, 111, 0.771);
+}
+
+.button-LogIn:active {
+    background-color: rgba(164, 254, 237, 0.73);
+}
+
+.button-wrapper {
+    width: 13rem;
+    margin: 1rem;
+    display: flex;
+}
+
+.shrink-on-active,
+.enlarge-on-hover {
+    transition-duration: 0.1s;
+}
+
+.shrink-on-active:active {
+    transform: scale(0.8);
+}
+
+.enlarge-on-hover:hover {
+    transform: scale(1.25);
+}
+
+.format {
+    margin-top: 2rem;
+}
+
+.username {
+    margin-right: 1rem;
+    margin-top: 0.3rem;
+}
+
+.password {
+    margin-left: 1rem;
+    margin-top: 0.3rem;
+}
+
+.buttons {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2.5rem;
+}
+
+.txt-inscription,
+.txt-inscription-link {
+    font-family: textFont;
+    font-size: 1.1rem;
+    color: black;
+    -webkit-text-stroke: black 0.05rem;
+    text-shadow: 0px 0px 5px white;
+}
+
+.txt-inscription-link {
+    font-family: textFont;
+    color: rgba(12, 230, 164, 0.821);
+    font-size: 1.2rem;
+}
+.txt-inscription-link:hover {
+    cursor: pointer;
+}
+
+.focus-Background .header-title {
+    position: absolute;
+    top: -45%;
+    font-size: 8rem;
+    justify-content: center;
+    text-align: center;
+    font-family: titleFont;
+    font-weight: bold;
+    margin: 0;
+    color: black;
+    text-shadow: 0px 0px 100px white;
+}

@@ -1,0 +1,64 @@
+<app-header></app-header>
+<div class="main-container" [ngStyle]="{ 'background-image': backgroundImage }">
+    <app-chat
+        [class.isChatMinimized]="isChatMinimized"
+        [class.isChatNotMinimized]="!isChatMinimized"
+        [class.withTransition]="isInitialized"
+        (isMinimizedEvent)="onChatMinimized($event)"
+        (isWindowEvent)="onWindowChange($event)"
+        class="chat"
+        >
+    </app-chat>
+    <div class="container" [class.isMenuMinimized]="!isChatMinimized" [class.isMenuNotMinimized]="isChatMinimized"  [class.withTransition]="isInitialized">
+        <div class="button-container">
+            <span class="button-wrapper" (click)="navigateTo('host')">
+                <button class="btn" [class.shrink-on-active]="!disableBtn" [class.usable]="!disableBtn" [disabled]="disableBtn">
+                    {{ createGameLabel }}
+                </button>
+            </span>
+        </div>
+    
+        <div class="game-table">
+            <div class="caption">{{ titleLabel }}</div>
+            <div class="scroll-bar">
+                <div
+                    class="gameList enlarge-on-hover"
+                    [class.selected]="gameActive[i]"
+                    *ngFor="let each of data; let i = index"
+                    (click)="ableOptions(each.id!, i)"
+                    [class.not-visible]="!each.isVisible"
+                >
+                    <div class="cell-game-title">
+                        <span>{{ each.game.title }}</span>
+                        <span *ngIf="evaluatedGames[i]?.averageRating">{{ evaluatedGames[i].averageRating }}/5 <img class="star" src="./assets/evaluated-star.png"></span>
+                        <span *ngIf="!evaluatedGames[i]?.averageRating">{{ evaluatedLabel }}</span>
+                    </div>
+                    <div *ngIf="gameActive[i]" style="margin-left: 1rem">
+                        <div class="game-description-container">
+                            <span class="game-label description">Description: </span>
+                            <div class="game-description">{{ each.game.description }}</div>
+                        </div>
+                        <div class="game-duration-container">
+                            <span class="game-label">Durée des questions: </span> <span class="game-duration">{{ each.game.duration }} secondes </span>
+                        </div>
+                        <div class="all-game-questions">
+                            <span class="game-label">Questions: </span>
+                            <div *ngFor="let question of each.game.questions; let j = index" class="game-question">
+                                <span style="display: inline-block; width: 50px; text-align: right">
+                                    {{ j + 1 }}
+                                </span>
+                                <span style="display: inline-block; width: 10px; text-align: center"> | </span>
+                                <span style="display: inline-block; width: 40px">
+                                    {{ question.type }}
+                                </span>
+                                <span style="display: inline-block; width: 10px"> : </span>
+    
+                                <span style="width: calc(100% - 150px); display: inline-flex">{{ question.text }}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,224 @@
+@font-face {
+    font-family: textFont;
+    src: url(./../../../assets/textFont.otf);
+}
+
+* {
+    font-family: textFont;
+    box-sizing: border-box;
+}
+
+.container {
+    position: relative;
+    display: grid;
+    grid-auto-columns: 1fr 2fr 1.3fr;
+    grid-template-areas: 'message main info';
+    height: 100vh;
+    width: 100vw;
+    min-height: 650px;
+    min-width: 1200px;
+    //background-image: url('./../../../assets/resultsBackground.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.message {
+    height: max(100vh, 650px);
+    grid-area: message;
+}
+
+.main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    grid-area: main;
+}
+
+.buttons {
+    width: 100%;
+    height: 20%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.histogram {
+    width: 90%;
+    height: calc(80% - 100px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition-duration: 0.1s;
+    margin: 0 5%;
+    border-bottom: 8px solid black;
+    border-radius: 10%;
+}
+
+.info {
+    background-color: rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    grid-area: info;
+    height: max(100vh, 650px);
+    width: 100%;
+}
+
+#question-title {
+    font-size: 1.5rem;
+    font-weight: 500;
+    font-family: 'textFont';
+    text-wrap: wrap;
+    overflow-y: auto;
+    overflow-wrap: anywhere;
+    width: 90%;
+    max-height: 100px;
+    margin: 2% 5%;
+}
+
+.button-wrapper {
+    height: 20%;
+    margin: auto;
+}
+
+.leaderscore {
+    height: 80%;
+    padding: 1rem;
+    width: 100%;
+}
+
+.button-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+button {
+    cursor: pointer;
+    margin: 1rem;
+    text-align: center;
+    padding: 0.5rem;
+    border: 0.2rem solid rgba(255, 255, 255, 0.896);
+    outline: 0.35rem solid hsla(0, 0%, 0%, 0.6);
+    background-color: rgba(12, 230, 164, 0.821);
+    border-radius: 1.5rem;
+    width: 15rem;
+    font-size: 1.5rem;
+    font-family: textFont;
+    transition-duration: 0.2s;
+}
+
+button:hover {
+    background-color: rgba(252, 76, 111, 0.771);
+}
+
+button:active {
+    background-color: rgba(164, 254, 237, 0.73);
+    transform: scale(0.8);
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(211, 211, 211, 0.556);
+    border-radius: 12px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(211, 211, 211, 0);
+}
+
+::-webkit-scrollbar {
+    width: 15px;
+}
+
+
+.chat {
+    z-index: 20;
+    max-width: 400px;
+    flex-grow: 1;
+    grid-area: message;
+    height: max(100vh, 650px);
+}
+.isChatMinimized {
+    transform: translate(-99%);
+}
+
+.isChatMinimized.withTransition {
+    transition: transform 0.5s ease;
+}
+
+.isChatNotMinimized.withTransition {
+    transition: transform 0.5s ease;
+}
+
+.isMenuMinimized.withTransition {
+    transition: transform 0.5s ease;
+}
+
+.isMenuNotMinimized {
+    transform: translate(-25%);
+}
+
+.isMenuNotMinimized.withTransition {
+    transition: transform 0.5s ease;
+}
+
+.quit-button-wrapper {
+    border-radius: 1.2rem;
+    width: 180px;
+    height: 50px;
+    display: block;
+    margin-top: 1rem;
+}
+
+#quit-button {
+    background-color: rgba(199, 13, 34, 0.7);
+    z-index: 50;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+}
+
+#quit-button:hover {
+    background-color: rgba(252, 76, 111, 0.7);
+}
+
+#quit-button:active {
+    background-color: rgba(255, 164, 182, 0.7);
+}
+
+.button {
+    cursor: pointer;
+    text-align: center;
+    font-family: textFont;
+    font-size: 1.4rem;
+    padding: 0.75rem 1rem;
+    border-radius: 1.2rem;
+    border: 0.2rem solid rgba(255, 255, 255, 0.896);
+    outline: 0.35rem solid hsla(0, 0%, 0%, 0.86);
+    background-color: rgba(12, 230, 164, 0.821);
+    box-shadow: 0px 5px 25px;
+    height: 3.5rem;
+}
+
+.button:hover{
+    background-color: rgba(252, 76, 111, 0.73);
+}
+
+.button:active{
+    background-color: rgba(164, 254, 237, 0.73);
+}
+
+.shrink-on-active {
+    transition-duration: 0.2s;
+}
+
+.shrink-on-active:active {
+    transform: scale(0.8);
+}
+
+

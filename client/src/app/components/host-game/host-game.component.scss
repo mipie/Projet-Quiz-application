@@ -1,0 +1,370 @@
+@font-face {
+    font-family: textFont;
+    src: url(./../../../assets/textFont.otf);
+}
+
+.justified {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.chat {
+    z-index: 20;
+    grid-area: chat;
+    max-width: 400px;
+    flex-grow: 1;
+}
+
+.menu {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    flex-grow: 1;
+    position: relative;
+    min-width: 500px;
+}
+.isChatMinimized {
+    transform: translate(-99%);
+}
+
+.isChatMinimized.withTransition {
+    transition: transform 0.5s ease;
+}
+
+.isChatNotMinimized.withTransition {
+    transition: transform 0.5s ease;
+}
+
+.isMenuMinimized.withTransition {
+    transition: transform 0.5s ease;
+}
+
+.isMenuNotMinimized {
+    transform: translate(-25%);
+}
+
+.isMenuNotMinimized.withTransition {
+    transition: transform 0.5s ease;
+}
+
+.main-container {
+    display: flex;
+}
+
+.host-background {
+    background-size: cover;
+    min-width: 1120px;
+    min-height: 630px;
+    height: 100vh;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: textFont;
+    justify-content: space-evenly;
+    height: 100%;
+    width: 100%;
+    padding-top: 80px;
+}
+
+.header-title {
+    font-weight: 50;
+    font-size: 2.5rem;
+    margin-top: 0;
+    margin-bottom: 15px;
+}
+
+.header-item {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.filter {
+    background-color: rgba(0, 0, 0, 0.2);
+    display: flex;
+}
+
+.mini-game {
+    position: relative;
+}
+
+.button-chat {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+}
+
+#quit-button {
+    background-color: rgba(199, 13, 34, 0.7);
+    z-index: 50;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#quit-button:hover {
+    background-color: rgba(252, 76, 111, 0.7);
+}
+
+#quit-button:active {
+    background-color: rgba(255, 164, 182, 0.7);
+}
+
+.players-count {
+    margin-top: 2rem;
+    font-size: 1.5rem;
+}
+
+button#quit-button {
+    border-radius: 50%;
+    outline: none;
+    border: none;
+    color: white;
+    padding: 0;
+    width: 50px;
+    height: 50px;
+    padding-top: 1px;
+    text-align: center;
+    padding-left: 4px;
+}
+
+.player {
+    width: fit-content;
+    display: inline-block;
+    margin: 0.5rem;
+    padding: 0.5rem 0.75rem;
+    border-radius: 0.3rem;
+    background-color: rgba(254, 232, 164, 0.73);
+    font-size: 1.2rem;
+    box-shadow: 0px 0px 75px white;
+    outline: solid 2px rgba(146, 133, 94, 0.482);
+}
+
+.players-container {
+    height: 45vh;
+    min-width: 400px;
+    max-width: 80%;
+    text-align: center;
+    overflow-y: auto;
+    height: auto;
+    margin-bottom: auto;
+}
+
+.shrink-on-active,
+.enlarge-on-hover {
+    transition-duration: 0.2s;
+}
+
+.shrink-on-active:active {
+    transform: scale(0.8);
+}
+
+.enlarge-on-hover:hover {
+    transform: scale(1.3);
+    box-shadow: 0px 0px 50px white;
+}
+
+.info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-height: 120px;
+    margin-bottom: 1rem;
+    width: 70%;
+}
+
+.interation-container {
+    justify-content: space-between;
+    margin-bottom: 1rem;
+    display: flex;
+    flex-direction: row;
+    height: 6rem;
+}
+
+.button-wrapper,
+.lock {
+    display: flex;
+    width: fit-content - 2rem;
+    height: 3.5rem;
+    margin: 0 1rem;
+    padding: -1rem;
+    border-radius: 1.2rem;
+}
+
+.lock {
+    border-radius: 50%;
+}
+
+.button,
+.lock-button {
+    cursor: pointer;
+    text-align: center;
+    font-family: textFont;
+    font-size: calc(1em + 0.5vw);
+    padding: 0.75rem 1rem;
+    border-radius: 1.2rem;
+    border: 0.2rem solid rgba(255, 255, 255, 0.896);
+    outline: 0.35rem solid hsla(0, 0%, 0%, 0.86);
+    background-color: rgba(12, 230, 164, 0.821);
+    box-shadow: 0px 5px 25px;
+    height: 3.5rem;
+}
+
+.lock-button {
+    width: 3.5rem;
+    border-radius: 50%;
+}
+
+button.block-begin,
+button.block-begin:hover,
+button.button.block-begin:active {
+    cursor: default;
+    font-size: calc(1em + 0.5vw);
+    padding: 0.75rem 1rem;
+    background-color: rgba(12, 230, 165, 0.466);
+    outline: solid 0.35rem rgba(0, 0, 0, 0.349);
+    transform: none;
+}
+
+.block-wrapper {
+    pointer-events: none;
+}
+
+.button:hover,
+.lock-button:hover {
+    background-color: rgba(252, 76, 111, 0.73);
+}
+
+.button:active,
+.lock-button:active {
+    background-color: rgba(164, 254, 237, 0.73);
+}
+
+.banned-container {
+    text-align: center;
+    overflow-y: auto;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.556);
+    border-radius: 12px;
+    cursor: pointer;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 254, 254, 0.668);
+}
+
+::-webkit-scrollbar-thumb:active {
+    background: rgb(255, 255, 255);
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(211, 211, 211, 0);
+}
+
+::-webkit-scrollbar {
+    width: 15px;
+}
+
+.player:hover {
+    cursor: pointer;
+    background-color: rgb(253, 236, 185);
+
+    i#ban {
+        display: inline;
+    }
+
+    i#ban:hover {
+        color: red;
+    }
+
+    i#ban:active {
+        color: rgba(255, 0, 0, 0.361);
+    }
+}
+
+.player i {
+    display: none;
+}
+
+#banned-title {
+    color: rgb(144, 28, 51);
+    text-align: center;
+    width: 100%;
+    margin: 0.5rem 0 0;
+    overflow-y: auto;
+}
+
+.banned {
+    width: fit-content;
+    color: rgba(144, 28, 51);
+    margin: 0.25rem;
+    display: inline-block;
+    -webkit-text-stroke: black 0.1px;
+}
+
+div#countdown-container {
+    background-color: rgba(255, 255, 255);
+    padding: 1rem;
+    font-family: textFont;
+    border-radius: 50%;
+    height: 15rem;
+    width: 15rem;
+    opacity: 0.9;
+    box-shadow: 0 0 3rem rgba(0, 0, 0, 0.9);
+}
+
+.background {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+    background-color: rgba(0, 0, 0, 0.4);
+    background-size: cover;
+    min-width: 1120px;
+    min-height: 630px;
+    height: 100vh;
+    width: 100vw;
+}
+
+#countdown {
+    margin: 0;
+    font-size: 8rem;
+}
+
+#locked-message {
+    font-size: 2rem;
+    min-height: 2.5rem;
+}
+
+.players-container .player:first-child {
+    background-color: rgba(0, 0, 0, 0.85);
+    color: rgba(255, 255, 255, 0.8);
+    outline: solid 2px rgba(0, 0, 0, 0.482);
+}
+
+.players-container .avatar {
+    width: 30px;
+    height: 30px;
+    border-radius: 15px;
+}
+
+.header-price {
+    display: flex;
+    flex-direction: row;
+    gap: 0.5rem;
+}
+.header-price img {
+    width: 30px;
+    height: 30px;
+    border-radius: 15px;
+}

@@ -1,0 +1,88 @@
+<div class="leaderscore justified">
+    <!-- <div class="organisator" *ngIf="!isGameDone && isObserver" (click)="goWatch('Organisateur')">
+        <h3>Organisateur</h3>
+        <i
+            (click)="goWatch('Organisateur')"
+            class="subtitle mute"
+            [class]="'Organisateur' === observedPlayer ? 'fa fa-eye' : 'fa fa-low-vision'"
+        ></i>
+    </div> -->
+    <h1 id="leaderscore-title">CLASSEMENT</h1>
+    <div class="container">
+        <div class="table" [class.no-hover]="isGameDone" [ngClass]="{ 'grid-layout-1': isGameDone, 'grid-layout-2': !isGameDone }">
+            <span [class.subtitle]="!isGameDone" (click)="sortColor()">
+                {{ isGameDone ? 'Position' : 'État' }}
+                <i
+                    *ngIf="activeSort === 'color' && !isGameDone"
+                    class="fa"
+                    [class]="{ 'fa-arrow-up': order === 'desc', 'fa-arrow-down': order === 'asc' }"
+                ></i>
+            </span>
+            <span [class.subtitle]="!isGameDone" (click)="sortNames()"
+                >Joueur
+                <i *ngIf="activeSort === 'name'" class="fa" [class]="{ 'fa-arrow-up': order === 'desc', 'fa-arrow-down': order === 'asc' }"></i>
+            </span>
+            <span [class.subtitle]="!isGameDone" (click)="sortScore()"
+                >Points
+                <i *ngIf="activeSort === 'score'" class="fa" [class]="{ 'fa-arrow-up': order === 'desc', 'fa-arrow-down': order === 'asc' }"></i>
+            </span>
+            <span [class.subtitle]="!isGameDone" (click)="sortBonus()"
+                >Bonus
+                <i *ngIf="activeSort === 'bonus'" class="fa" [class]="{ 'fa-arrow-up': order === 'desc', 'fa-arrow-down': order === 'asc' }"></i>
+            </span>
+            <span [class.subtitle]="!isGameDone && !isObserver" (click)="muteAll()" *ngIf="!isGameDone && !isObserver">Chat</span>
+            <span [class.subtitle]="!isGameDone && isObserver" *ngIf="!isGameDone && isObserver">Watch</span>
+        </div>
+        <div id="players-container">
+            <div
+                class="player-score"
+                *ngFor="let player of players; let i = index"
+                [ngStyle]="{ 'background-color': player.name === observedPlayer ? 'rgba(0, 0, 0, 0.2)' : '' }"
+                [ngClass]="{
+                    'grid-layout-1': isGameDone,
+                    'grid-layout-2': !isGameDone,
+                    'first-gold': isGameDone && player.position === 0,
+                    'second-silver': isGameDone && player.position === 1,
+                    'third-bronze': isGameDone && player.position === 2
+                }"
+            >
+                <span
+                    class="no-overflow"
+                    [ngClass]="{
+                        'surrender-background': player.isSurrender,
+                        'finish-background': isFinish,
+                        'no-interaction-background': !player.isInteract && !player.isSurrender && !isFinish,
+                        'first-interaction-background': player.isInteract && !player.isFinish && !player.isSurrender && !isFinish,
+                        'confirmed-answer-background': player.isFinish && !player.isSurrender && !isFinish
+                    }"
+                    >{{ player.position + 1 }}</span
+                >
+                <span
+                    class="no-overflow"
+                    [ngClass]="{
+                        surrender: player.isSurrender,
+                        finish: isFinish,
+                        'no-interaction': !player.isInteract && !player.isSurrender && !isFinish,
+                        'first-interaction': player.isInteract && !player.isFinish && !player.isSurrender && !isFinish,
+                        'confirmed-answer': player.isFinish && !player.isSurrender && !isFinish
+                    }"
+                    >{{ player.name }}</span
+                >
+                <span class="no-overflow">{{ player.score }}</span>
+                <span class="no-overflow">{{ player.bonus }}</span>
+                <i
+                    (click)="toggleMute(i)"
+                    class="subtitle mute"
+                    *ngIf="!isGameDone && !isObserver"
+                    [class]="players[i].isMute ? 'fa fa-volume-mute' : 'fa fa-volume-up'"
+                ></i>
+                <i
+                    (click)="goWatch(player.name)"
+                    class="subtitle mute"
+                    *ngIf="!isGameDone && isObserver"
+                    [ngClass]="{'fa fa-eye': player.name !== observedPlayer, 'disable':player.name === observedPlayer}"
+                ></i>
+            </div>
+        </div>
+    </div>
+</div>

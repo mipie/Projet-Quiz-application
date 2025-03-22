@@ -1,0 +1,71 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+#chart-title {
+    margin-top: 0;
+    font-weight: 100;
+}
+
+.container{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#myChart {
+    width: 100% !important ;
+    padding: 1rem;
+}
+
+.choices-field {
+    overflow-y: auto;
+    width: 100%;
+    max-height: 180px;
+}
+
+.answer {
+    font-family: textFont;
+    font-size: 1rem;
+    color: black;
+    border: 0.02rem solid black;
+    border-radius: 0.7rem;
+    background-color: white;
+    padding: 5px;
+    width: 85%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 5px;
+    text-wrap: wrap;
+    overflow-wrap: anywhere;
+}
+
+.isBadAnswer {
+    background-color: rgba(252, 76, 111, 0.8);
+    border-color: rgb(199, 62, 89);
+    border-width: 2px;
+}
+
+.isGoodAnswer {
+    background-color: rgba(12, 230, 164, 0.8);
+    border-color: rgb(9, 180, 129);
+    border-width: 2px;
+}
+
+::-webkit-scrollbar-thumb {
+    background:  rgba(211, 211, 211, 0.556); 
+    border-radius: 12px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(211, 211, 211, 0); 
+}
+
+::-webkit-scrollbar {
+    width: 15px; 
+}

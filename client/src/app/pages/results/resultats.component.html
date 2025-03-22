@@ -1,0 +1,32 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" />
+<div class="container" [ngStyle]="{ 'background-image': backgroundImage }">
+    <app-chat
+        [class.isChatMinimized]="isChatMinimized"
+        [class.isChatNotMinimized]="!isChatMinimized"
+        [class.withTransition]="isInitialized"
+        (isMinimizedEvent)="onChatMinimized($event)"
+        (isWindowEvent)="onWindowChange($event)"
+        class="chat"
+    >
+    </app-chat>
+
+    <div class="main" [class.isMenuMinimized]="!isChatMinimized" [class.isMenuNotMinimized]="isChatMinimized"  [class.withTransition]="isInitialized"> 
+        <div id="question-title">{{ questionIndex + 1 }}. {{ questionTitle }} ({{ questionPoints }} points)</div>
+        <app-histogram class="histogram"></app-histogram>
+        <div class="buttons">
+            <div class="button-wrapper" *ngIf="!isFirst" (click)="buttonClick(); previousHistogram()">
+                <button [disabled]="isFirst">{{ previous }}</button>
+            </div>
+            <div class="button-wrapper" *ngIf="!isLast" (click)="buttonClick(); nextHistogram()">
+                <button [disabled]="isLast">{{ next }}</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="info">
+        <app-player-list class="leaderscore"></app-player-list>
+        <div class="button-wrapper" (click)="buttonClick(); goToHome()">
+            <button class="home">{{ menu }}</button>
+        </div>
+    </div>
+</div>

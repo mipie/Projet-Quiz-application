@@ -1,0 +1,74 @@
+<app-header></app-header>
+<div class="main-container" [ngStyle]="{ 'background-image': backgroundImage }">
+    <app-chat
+        [class.isChatMinimized]="isChatMinimized"
+        [class.isChatNotMinimized]="!isChatMinimized"
+        [class.withTransition]="isInitialized"
+        (isMinimizedEvent)="onChatMinimized($event)"
+        (isWindowEvent)="onWindowChange($event)"
+        class="chat"
+        >
+    </app-chat>
+    <div class="admin-container" [class.isMenuMinimized]="!isChatMinimized" [class.isMenuNotMinimized]="isChatMinimized" [class.withTransition]="isInitialized">
+        <div class="buttons-drawer">
+            <span class="button-wrapper" (click)="clickedButton(); directToCreateGame()">
+                <button class="allowedHover shrink-on-active">{{ createLabel }}</button>
+            </span>
+            <span class="button-wrapper" (click)="directToModifyGame()">
+                <button [class.allow-hover]="isOnlyOneChecked" [class.shrink-on-active]="isOnlyOneChecked">{{ modifyLabel }}</button>
+            </span>
+            <span class="button-wrapper" (click)="deleteGame()">
+                <button [class.allow-hover]="isAnyChecked" [class.shrink-on-active]="isAnyChecked">{{ deleteLabel }}</button>
+            </span>
+            <span class="button-wrapper" (click)="exportGame()">
+                <button [class.allow-hover]="isAnyChecked" [class.shrink-on-active]="isAnyChecked">{{ exportLabel }}</button>
+            </span>
+            <a #export style="display: none"></a>
+            <span class="button-wrapper" (click)="import.click()" (click)="this.clickedButton()">
+                <button class="allowedHover shrink-on-active">{{ importLabel }}</button>
+            </span>
+            <input #import id="input" type="file" accept=".json" (change)="importGame($event)" />
+        </div>
+    
+        <div class="games-drawer">
+            <div class="button-container">
+                <span class="tab-selection">
+                    <span id="games-list-tab" [class.selected]="selectedTab === 'games'" class="tab-button" (click)="selectTab('games')">
+                        <div class="shrink-on-active">{{ listGameLabel }}</div>
+                    </span>
+                </span>
+            </div>
+            <div class="games-container" *ngIf="selectedTab === 'games'">
+                <div class="game-title" (mouseover)="eye.classList.add('hover-effect')" (mouseout)="eye.classList.remove('hover-effect')">
+                    <span class="cell-game-title" (click)="onCheck(!this.isAllChecked)">{{ nameLabel }}</span>
+                    <span class="cell-game-date" (click)="onCheck(!this.isAllChecked)">{{ lastModificationLabel }}</span>
+                    <span #eye class="cell-game-selected subtitle" (mousedown)="hideAll()">{{ visibilityLabel }}</span>
+                </div>
+                <div class="scroll-bar">
+                    <div
+                        class="game-table"
+                        *ngFor="let each of games; let i = index"
+                        [class.not-visible]="!each.isVisible"
+                        [class.checked]="checkGame[i]"
+                        (click)="changeChecked(i)"
+                    >
+                        <span class="cell-game-title">
+                            {{ evaluationGames.length > 0 && evaluationGames[i].averageRating ? (evaluationGames[i].averageRating + '/5') : 'N/A' }} <img class="star" [src]="each.isVisible ? './assets/evaluated-white-star.png' : './assets/evaluated-star.png'" > {{ each.game.title }}
+                        </span>
+                        <span class="cell-game-date">
+                            {{ each.game.lastModification | date: 'yyyy-MM-dd HH:mm:ss' }}
+                        </span>
+                        <span class="cell-game-selected" (click)="changeChecked(i)">
+                            <i
+                                style="padding: 0"
+                                class="eye-icon"
+                                (click)="setCloseVisibility(each)"
+                                [class]="{ fa: true, 'fa-eye': each.isVisible, 'fa-eye-slash': !each.isVisible }"
+                            ></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

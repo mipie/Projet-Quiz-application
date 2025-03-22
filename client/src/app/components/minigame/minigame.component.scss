@@ -1,0 +1,123 @@
+@font-face {
+    font-family: textFont;
+    src: url(./../../../assets/textFont.otf);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+h1 {
+    font-family: textfont;
+    margin-top: 90px;
+}
+
+#word-display{
+    font-family: textfont;
+    text-wrap: wrap;
+    text-align: center;
+    margin: 1rem;
+    font-size: 1.2rem;
+}
+
+#message{
+    font-family: textfont;
+    min-height: 5ch;
+    font-size: 1.1rem;
+    margin: 0px 10px;
+    text-align: center;
+}
+
+#wrong-letters {
+    font-family: textfont;
+    text-wrap: wrap;
+    text-align: center;
+    margin: 1rem;
+    height: 100px;
+    font-size: 0.9rem;
+}
+
+#wrong-letters-title {
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+}
+
+#letter-input {
+    height: 4ch;
+    width: 4ch;
+    border-radius: 0.5rem;
+    text-align: center;
+}
+
+#input-container {
+    display: flex
+}
+
+.mini-game{
+    min-width: 300px;
+    max-width: 300px;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    border: 7px solid #00000066;
+    border-radius: 1rem 0rem 0rem 1rem;
+    box-shadow: 0px 0px 30px;
+}
+
+img {
+    width: 80%;
+    padding: 15px;
+    border: 5px solid rgba(0, 0, 0, 0.5);
+    border-radius: 15px;
+}
+
+.letter {
+    width: 1.5ch;
+    height: 1ch;
+    display: inline-block;
+}
+
+.image-box {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.button-wrapper{
+    margin-left: 0.5rem;
+    width: fit-content;
+    height: fit-content;
+    display: block;
+}
+
+.button {
+    cursor: pointer;
+    height: 100%;
+    width: 100%;
+    text-align: center;
+    font-family: textFont;
+    font-size: 1rem;
+    border-radius: 1.2rem;
+    padding: 0.2rem 0.4rem;
+    border: 0.2rem solid rgba(0, 0, 0, 0.896);
+    background-color: rgba(12, 230, 164, 0.821);
+}
+
+.button:hover {
+    background-color: rgba(252, 76, 111, 0.73);
+}
+
+.button:active {
+    background-color: rgba(164, 254, 237, 0.73);
+}
+
+.shrink-on-active {
+    transition-duration: 0.1s;
+}
+
+.shrink-on-active:active {
+    transform: scale(0.8);
+}

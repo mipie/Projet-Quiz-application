@@ -1,0 +1,33 @@
+<div class="mini-game">
+    <h1>Let's play !</h1>
+    <div class="image-box">
+        <img [src]="imageSrc"/>
+    </div>
+    
+    <div id="word-display">
+        <span class='letter' *ngFor="let letter of mainWord.split('')">
+            {{guessedLetters.includes(normalizeString(letter)) ? letter : '_' }}
+        </span>
+        <span *ngFor="let letter of mainWord">{{letter}} </span>
+    </div>
+    
+    <div id="message">
+        <div>{{message[0]}}</div>
+        <div>{{message[1]}}</div>
+    </div>
+
+    <div id="input-container">
+        <input *ngIf="!isGameLost && !isGameWon" type="text" id="letter-input" maxlength="1" [(ngModel)]="answer" (keydown)="handleKeydown($event)"/>
+        <span *ngIf="!isGameLost && !isGameWon" class="button-wrapper" (click)="sendAnswer()">
+            <button class="button shrink-on-active">Envoyer</button>
+        </span>
+        <span class="button-wrapper" (click)="restart()" (keydown.enter)="restart()">
+            <button class="button shrink-on-active" *ngIf="isGameLost || isGameWon">Recommencer</button>
+        </span>
+    </div>
+    
+    <div id="wrong-letters">
+        <div id="wrong-letters-title">Lettres incorrectes:</div>
+        <span *ngFor="let letter of incorrectLetters"> {{letter}}, </span>
+    </div>
+</div>

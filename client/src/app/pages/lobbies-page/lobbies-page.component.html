@@ -1,0 +1,101 @@
+<app-header></app-header>
+<div class="container" [ngStyle]="{ 'background-image': backgroundImage }">
+    <app-chat
+        [class.isChatMinimized]="isChatMinimized"
+        [class.isChatNotMinimized]="!isChatMinimized"
+        [class.withTransition]="isInitialized"
+        (isMinimizedEvent)="onChatMinimized($event)"
+        (isWindowEvent)="onWindowChange($event)"
+        class="chat"
+    >
+    </app-chat>
+
+    <div class="menu" [class.isMenuMinimized]="!isChatMinimized" [class.isMenuNotMinimized]="isChatMinimized" [class.withTransition]="isInitialized" (click)="resetLobby()">
+        <div class="wallet-box">
+            <i class="fa" [ngClass]="'fa-wallet'"></i>
+            <p>{{ this.currentUser?.wallet }}</p>
+            <img src="./assets/pieces.png" />
+        </div>
+        <div class="board">
+            <div class="caption">{{ titleLabel }}</div>
+            <div class="column-header">
+                <div class="column-room">{{ numberLabel }}</div>
+                <div class="column-creator">{{ creatorLabel }}</div>
+                <div class="column-name">{{ gameNameLabel }}</div>
+                <div class="column-modeGame">{{ modeLabel }}</div>
+                <div class="column-players">{{ numberPlayersLabel }}</div>
+                <div class="column-observer">{{ observersLabel }}</div>
+                <div class="column-price">{{ priceLabel }}</div>
+                <div class="column-status">{{ stateLabel }}</div>
+            </div>
+            <div class="scroll-bar">
+                <div *ngIf="this.games.length === 0" class="noGame"> 
+                    {{nogame}}
+                    <span class="loader"></span>
+                </div>
+                <div
+                    class="game-list enlarge-on-hover"
+                    [class.selected]="selectedGameIndex === i"
+                    *ngFor="let game of this.games; let i = index"
+                    (click)="clickedLobby($event, i)"
+                >
+                    <div class="game-details">
+                        <div class="game-room">{{ game.room }}</div>
+                        <div class="game-creator">{{ game.creator }}</div>
+                        <div class="game-name">{{ game.name }}</div>
+                        <div class="game-mode">
+                            <i class="fa" [ngClass]="game.mode"> </i>
+                        </div>
+                        <div class="game-players">{{ game.numberOfPlayers }}</div>
+                        <div class="game-observers">{{ game.observers }}</div>
+                        <div class="game-price">{{ game.price }}</div>
+                        <div class="game-status">
+                            <i class="fa" [ngClass]="getStateRoom(game.state)"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="bottom-box">
+            <div class="legend-box">
+                <h2 style="margin: 0; align-self: center; font-size: 25px; margin-left: 10px">{{ legendLabel }}</h2>
+                <div class="row-1">
+                    <div class="legend-item">
+                        <i class="fa" [ngClass]="'fa-trophy'"> </i>
+                        <p>{{ rankedLabel }}</p>
+                    </div>
+                    <div class="legend-item">
+                        <i class="fa" [ngClass]="'fa-gamepad'"> </i>
+                        <p>{{ classicLabel }}</p>
+                    </div>
+                    <div class="legend-item">
+                        <i class="fa" [ngClass]="'fa-users'"> </i>
+                        <p>{{ friendsLabel }}</p>
+                    </div>
+                </div>
+                <div class="row-2">
+                    <div class="legend-item">
+                        <i class="fa" [ngClass]="'fa-unlock'"> </i>
+                        <p>{{ inwaitingLabel }}</p>
+                    </div>
+                    <div class="legend-item">
+                        <i class="fa" [ngClass]="'fa-lock'"> </i>
+                        <p>{{ inprogressLabel }}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="button-container">
+                <div class="button-box">
+                    <span class="button-wrapper" (click)="buttonJoinCode()">
+                        <button #joinButton class="button shrink-on-active">{{ buttonCodeLabel }}</button>
+                    </span>
+                </div>
+                <div class="button-box">
+                    <span class="button-wrapper" (click)="buttonJoinLobby()">
+                        <button #joinButton [disabled]="!isSelectedRoom" class="button shrink-on-active">{{ buttonJoinLabel }}</button>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

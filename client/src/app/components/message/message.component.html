@@ -1,0 +1,36 @@
+<div class="message">
+    <button *ngIf="!isOrganisator && !isGameDone" class="button" (click)="openAbandonDialog()">
+        <button class="surrender">Abandonner</button>
+    </button>
+    <button *ngIf="isOrganisator && !isGameDone" class="button" (click)="quitGame()">
+        <button class="surrender">Quitter</button>
+    </button>
+    <div id="conversation">
+        <div class="singular-chat" *ngFor="let message of messages" [class.sentByMe]="message.author === 'Moi'">
+            <div class="chat-header">
+                <p class="author" [class.sentByOrg]="message.author === 'Organisateur'">{{ message.author }}</p>
+                <p class="time">{{ message.sentTime }}</p>
+            </div>
+            <p class="chat-text">{{ message.chatMessage }}</p>
+        </div>
+    </div>
+    <form id="send-container">
+        <textarea
+        type="text"
+        id="message-input"
+        rows="1"
+        maxlength="200"
+        [class.mute]="isMute"
+        [placeholder]="isMute ? 'L\'organisateur vous a rendu muet.' : 'Saisissez votre message...'"
+        [(ngModel)]="isMute ? '' : messageInput"
+        oninput='this.style.height = "";this.style.height = this.scrollHeight-17 + "px"'
+        onchange='this.style.height = ""'
+        (keydown.enter)="onSubmit()"
+        (ngModelChange)="valueChange(messageInput)"
+        [ngModelOptions]="{ standalone: true }"
+        [disabled]="isMute"
+        ></textarea>
+        <span *ngIf="!isMute" id="character-count">{{ remainingTextCount }}</span>
+        <button type="submit" id="send-button" (click)="buttonClick(); onSubmit()" [disabled]="isMute">Envoyer</button>
+    </form>
+</div>

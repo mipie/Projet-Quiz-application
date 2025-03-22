@@ -1,0 +1,110 @@
+<div class="dialog-container" [ngStyle]="{ 'background-image': backgroundImage }" (click)="isEditingUsername = false;  messageError='';">
+    <h1 class="title"> {{ titleLabel }} </h1>
+
+    <div class="container">
+        <div class="username-language">
+            <div class="username">
+                <h3>{{ usernameSectionLabel }}</h3>
+                <div *ngIf="!isEditingUsername" class="modification-box">
+                    <h3 style="
+                    width: 21ch;
+                    border: 1px solid black;
+                    padding: 10px;
+                    font-size: 16px;
+                    "(click)="triggerEditUsername($event)">{{ currentUser?.username }}</h3>
+                    <div class="box">
+                        <img src="./assets/pencilUsername.png" (click)="triggerEditUsername($event)" />
+                    </div>
+                </div>
+                <div *ngIf="isEditingUsername" class="modification-box2" (click)="preventPropagation($event)" (keydown.enter)="onUsernameClick()">
+                    <input [(ngModel)]="editedUsername" maxlength="12"/>
+                    <div class="box">
+                        <img src="./assets/pencilUsername.png" (click)="onUsernameClick()" />
+                    </div>
+                </div>
+                <p *ngIf="isErrorEmpty || isErrorAlreadyUsed || isErrorLength">{{ messageError }}</p>
+            </div>
+            <div class="language">
+                <h3>{{ languageSectionLabel }}</h3>
+                <div class="language-options">
+                    <h3>{{ frenchLabel }}</h3>
+                    <label class="switch">
+                        <input type="checkbox" [(ngModel)]="isLanguageToggle" (change)="onLanguageClick()" />
+                        <span class="slider round"></span>
+                    </label>
+                    <h3>{{ englishLabel }}</h3>
+                </div>
+            </div>
+        </div>
+
+        <div class="theme-avatar">
+            <div class="avatar">
+                <span class="avatar-container">
+                    <h3 class="avatar-title">{{ avatarsSectionLabel }}</h3>
+                    <input
+                        type="file"
+                        class="file"
+                        #fileInput
+                        (change)="onFileSelected($event)"
+                        multiple
+                        accept="image/jpeg, image/jpg"
+                        style="display: none"
+                    />
+                    <img src="./assets/uploadAvatar.png" (click)="onclickUploadAvatar(fileInput)" class="custom-file-button" />
+                </span>
+                <div class="item-list">
+                    <ul>
+                        <li *ngFor="let avatar of avatarList">
+                            <div>
+                                <a>
+                                    <img [src]="avatar" (click)="onAvatarClick(avatar)" [class.selected]="avatar === avatarSelected" />
+                                </a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="theme">
+                <h3 style="
+                height: 25px;
+                ">{{ themeSectionLabel }}</h3>
+                <div class="item-list">
+                    <ul>
+                        <li *ngFor="let theme of themeList">
+                            <div>
+                                <a>
+                                    <img [src]="theme" (click)="onThemeClick(theme)" [class.selected]="theme === themeSelected" />
+                                </a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="historic">
+            <h3 class="history-title">{{ historyLabel }}</h3>
+            <div class="first-row">
+                <h3>Type</h3>
+                <h3>Date</h3>
+            </div>
+            <div class="historic-list">
+                <ul>
+                    <li *ngFor="let time of historic; let i = index" class="historic-item">
+                        <div class="type">
+                            {{ i % 2 === 0 ? connectionLabel : disconnectLabel }}
+                        </div>
+                        <div class="date">
+                            <span>
+                                {{ time.toDate() | date: 'yyyy-MM-dd' }}
+                            </span>
+                            <span style="min-width: 70px;">
+                                {{ time.toDate() | date: 'HH:mm:ss' }}
+                            </span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

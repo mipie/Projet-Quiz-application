@@ -1,0 +1,71 @@
+<div class="dialog-container" [ngStyle]="{ 'background-image': backgroundImage }">
+    <h1 class="title"> {{ titleLabel }} </h1>
+    <div class="container">
+        <div class="wallet-box">
+            <i class="fa-solid fa-wallet"></i>
+            <p>{{ this.currentUser?.wallet }}</p>
+            <img src="./assets/pieces.png" />
+        </div>
+        <div class="list-container">
+            <div class="avatar-list">
+                <h3>{{ avatarsLabel }}</h3>
+                <ul>
+                    <li *ngFor="let avatar of avatarList">
+                        <div
+                            class="item-content"
+                            (click)="onAvatarClick(avatar)"
+                            [class.selected]="avatar === avatarSelected"
+                            [class.purchased]="isAvatarAlreadyBuy(avatar)"
+                        >
+                            <a class="shop-item">
+                                <img [src]="avatar" />
+                                <span class="blur"></span>
+                                <span class="price" *ngIf="isAvatarAlreadyBuy(avatar)">
+                                    {{purchased}}
+                                </span>
+                                <span class="price" *ngIf="!isAvatarAlreadyBuy(avatar)">
+                                    {{priceItem}} <img style="
+                                    width: 15px;
+                                    height: 15px;
+                                " src="./assets/pieces.png" />
+                                </span>
+                            </a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="theme-list">
+                <h3>{{ themesLabel }}</h3>
+                <ul>
+                    <li *ngFor="let theme of themeList">
+                        <div
+                            class="item-content"
+                            (click)="onThemeClick(theme)"
+                            [class.selected]="theme === themeSelected"
+                            [class.purchased]="isThemeAlreadyBuy(theme)"
+                        >
+                            <a class="shop-item">
+                                <img [src]="theme" />
+                                <span class="blur"></span>
+                                <span class="price" *ngIf="isThemeAlreadyBuy(theme)">
+                                    {{purchased}}
+                                </span>
+                                <span class="price" *ngIf="!isThemeAlreadyBuy(theme)">
+                                    {{priceItem}} <img style="
+                                        width: 15px;
+                                        height: 15px;
+                                    " src="./assets/pieces.png" />
+                                </span>
+                            </a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="button-box">
+            <span class="button-wrapper">
+                <button #joinButton class="button shrink-on-active" (click)="buyItem()">Acheter</button>
+            </span>
+        </div>
+    </div>
+</div>

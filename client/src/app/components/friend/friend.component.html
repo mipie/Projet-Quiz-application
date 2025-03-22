@@ -1,0 +1,65 @@
+<div class="dialog-container" [ngStyle]="{ 'background-image': backgroundImage }">
+    <h1 class="title"> {{title}} </h1>
+    <div class="container">
+        <div class="button-container">
+            <span [ngClass]="{ active: viewMode === 'friends' }" (click)="viewMode = 'friends'" id="friend-tab"
+                >{{ friendsLabel }}
+                <span id="circle-notifiaction" *ngIf="numberFriendNotifications > 0">
+                    <span>{{ numberFriendNotifications }}</span>
+                </span>
+            </span>
+            <span id="search-friend-tab" [ngClass]="{ active: viewMode === 'search' }" (click)="viewMode = 'search'">{{ searchLabel }}</span>
+        </div>
+        <div *ngIf="viewMode === 'friends'" class="amis-section">
+            <div class="requests-List">
+                <h3>{{ requestLabel }}</h3>
+                <ul id="requests">
+                    <div class="message" *ngIf="requestsList.length === 0"> {{noFriendsReq}} </div>
+                    <li *ngFor="let request of requestsList">
+                        {{ request.username }}
+                        <div class="double-icons-container">
+                            <div class="icon-container" (click)="clickedAcceptRequest(request)">
+                                <i class="fa fa-thumbs-up"></i>
+                            </div>
+                            <div class="icon-container" (click)="clickedAcceptRequest(request)">
+                                <i class="fa fa-thumbs-down"></i>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="friends-List">
+                <h3>{{ yourFriends }}</h3>
+                <ul id="friends">
+                    <div class="message" *ngIf="friendsList.length === 0"> {{noFriends}} </div>
+                    <li *ngFor="let friend of friendsList">
+                        {{ friend.username }}
+                        <div class="icon-container" (click)="clickedDeleteFriend(friend)">
+                            <i class="fa fa-trash"></i>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    
+        <div *ngIf="viewMode === 'search'" class="search-section">
+            <div class="search-container">
+                <i class="fa fa-search search-icon"></i>
+                <input type="text" [(ngModel)]="searchInput" placeholder="{{ searchbarLabel }}" (input)="searchFriend()" />
+            </div>
+            <ul id="users">
+                <li *ngFor="let user of usersList">
+                    {{ user.username }}
+                    <a (click)="clickedSendRequest(user)">
+                        <div *ngIf="getRequestStatus(user)" class="icon-container"> 
+                            <i class="fa-solid fa-circle-check"> </i>
+                        </div>
+                        <div *ngIf="!getRequestStatus(user)" class="icon-container">
+                            <i class="fa-solid fa-user-plus"> </i>
+                        </div>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
